@@ -1,7 +1,7 @@
 import React from "react";
 
-function AddAdressPage() {
+function EditAddress() {
   return <div>oi</div>;
 }
 
-export default AddAdressPage;
+export default EditAddress;

@@ -1,14 +1,24 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { theme } from "../../constants/themes";
 
+// Material
+import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
+import BottomNavigation from "@material-ui/core/BottomNavigation";
+import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
+import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
+import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
+import PersonOutlineOutlinedIcon from "@material-ui/icons/PersonOutlineOutlined";
+
+// Component
 import ProductDetail from "./ProductDetail";
 
 const BaseFlex = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 130vh;
+  height: 140vh;
 `;
 
 const BoxInfo = styled.div`
@@ -40,11 +50,6 @@ const InfoAddress = styled(GrayTitle)`
 const RestaurantName = styled(InfoAddress)`
   color: #e86e5a;
   margin-bottom: 0;
-`;
-
-const BoxInfoWhite = styled(BoxInfo)`
-  background-color: white;
-  height: 120vh;
 `;
 
 const TaxBox = styled.div`
@@ -111,12 +116,24 @@ export const Button = styled.button`
   text-align: center;
   margin-left: 20px;
   margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
   border: 0;
 `;
 
+const useStyles = makeStyles({
+  root: {
+    width: 350,
+  },
+});
+
 function CartPage() {
+  const classes = useStyles();
+
+  // Estado
+  const [value, setValue] = useState(0);
   const [checked, setChecked] = useState(false);
 
+  // checbox
   const checkState = () => {
     setChecked(!checked);
   };
@@ -150,6 +167,26 @@ function CartPage() {
         <LabelCheckBox>Cartão de crédito</LabelCheckBox>
       </CheckBoxContainer>
       <Button>Confirmar</Button>
+      <ThemeProvider theme={theme}>
+        <BottomNavigation
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
+          showLabels
+          className={classes.root}
+        >
+          <BottomNavigationAction
+            icon={<HomeOutlinedIcon fontSize="large" />}
+          />
+          <BottomNavigationAction
+            icon={<ShoppingCartOutlinedIcon fontSize="large" />}
+          />
+          <BottomNavigationAction
+            icon={<PersonOutlineOutlinedIcon fontSize="large" />}
+          />
+        </BottomNavigation>
+      </ThemeProvider>
     </BaseFlex>
   );
 }

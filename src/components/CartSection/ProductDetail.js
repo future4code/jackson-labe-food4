@@ -21,7 +21,6 @@ const CardBox = styled.div`
 const BoxImg = styled.img`
   width: 97px;
   height: 113px;
-  object-fit: contain;
 `;
 
 const ContainerInfos = styled.div`
@@ -89,7 +88,7 @@ function ProductDetail() {
   return (
     <Container>
       <CardBox>
-        <BoxImg src="https://unsplash.com/photos/L8o2sIPSOnc" />
+        <BoxImg src="https://conteudo.imguol.com.br/c/entretenimento/71/2020/05/27/guia-do-hamburguer---sanduiche-1590607899872_v2_1920x1231.jpg" />
         <ContainerInfos>
           <CounterProduct>2</CounterProduct>
           <ProductName>Stencil</ProductName>

@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import axios from "axios";
 
 const Container = styled.div`
   width: 100vw;

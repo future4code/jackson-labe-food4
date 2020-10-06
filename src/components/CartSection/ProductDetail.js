@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -86,9 +86,13 @@ const ButtonDelete = styled.button`
 function ProductDetail() {
   return (
     <Container>
+      {/* Container Produto */}
       <CardBox>
         <BoxImg src="https://conteudo.imguol.com.br/c/entretenimento/71/2020/05/27/guia-do-hamburguer---sanduiche-1590607899872_v2_1920x1231.jpg" />
+
+        {/* Container Informações Gerais */}
         <ContainerInfos>
+          {/* Infos */}
           <CounterProduct>2</CounterProduct>
           <ProductName>Stencil</ProductName>
           <ProductTitle>

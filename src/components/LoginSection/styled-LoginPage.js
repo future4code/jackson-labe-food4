@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Typography, Link } from '@material-ui/core'
 
-export const FormContainer = styled.div `
+export const FormContainer = styled.form `
     display: flex;
     flex-direction: column;
     box-sizing: border-box;

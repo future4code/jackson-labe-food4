@@ -34,7 +34,9 @@ function Router() {
           <CartPage />
         </Route>
 
-        <Route exact path="/addadress">
+
+        <Route exact path="/addaddress">
+
           <AddAddressPage />
         </Route>
 

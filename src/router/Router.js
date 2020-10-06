@@ -8,7 +8,7 @@ import CartPage from "../components/CartSection/CartPage";
 import Feed from "../components/HomeSection/Feed";
 import LoginPage from "../components/LoginSection/LoginPage";
 import SignUpPage from "../components/LoginSection/SignUpPage";
-import AddAddressPage from "../components/LoginSection/AddAddressPage";
+import AddAddressPage from "../components/AddressSection/AddAddressPage";
 import ProfilePage from "../components/ProfileSection/ProfilePage";
 import EditProfile from "../components/ProfileSection/EditProfile";
 import EditAddress from "../components/ProfileSection/EditAddress";
@@ -34,9 +34,7 @@ function Router() {
           <CartPage />
         </Route>
 
-
         <Route exact path="/addaddress">
-
           <AddAddressPage />
         </Route>
 

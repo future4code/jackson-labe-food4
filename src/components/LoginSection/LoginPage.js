@@ -1,3 +1,5 @@
+
+
 import React, { useState } from "react";
 import {Button, InputAdornment, TextField, ThemeProvider, Typography} from '@material-ui/core'
 import { useHistory } from "react-router-dom";
@@ -9,8 +11,9 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import axios from 'axios'
 import { BASE_URL } from "../../constants/urls";
 
+
 function LoginPage() {
-  const history = useHistory()
+  const history = useHistory();
 
   const [Email, setEmail] = useState("")
   const [Senha, setSenha] = useState("")
@@ -55,6 +58,9 @@ function LoginPage() {
 
   return (
     <ThemeProvider theme={theme}>
+
+      
+
       <Container>      
           <LogoRappi src={LogoRappi4} />      
           <Text>Entrar</Text>  
@@ -94,9 +100,10 @@ function LoginPage() {
           <Button type="submit" onClick={fazerLogin} color="secondary" variant="contained">Login</Button>
           <LinkCadastro color="textPrimary" onClick={irParaCadastro}><Typography>Não possui cadastro? Clique aqui</Typography></LinkCadastro>
         </FormContainer>
+
       </Container>
     </ThemeProvider>
-  )
+  );
 }
 
 export default LoginPage;

@@ -8,10 +8,10 @@ import CartPage from "../components/CartSection/CartPage";
 import Feed from "../components/HomeSection/Feed";
 import LoginPage from "../components/LoginSection/LoginPage";
 import SignUpPage from "../components/LoginSection/SignUpPage";
-import AddAdressPage from "../components/LoginSection/AddAdressPage";
+import AddAddressPage from "../components/LoginSection/AddAddressPage";
 import ProfilePage from "../components/ProfileSection/ProfilePage";
 import EditProfile from "../components/ProfileSection/EditProfile";
-import EditAdress from "../components/ProfileSection/EditAdress";
+import EditAddress from "../components/ProfileSection/EditAddress";
 import RestaurantPage from "../components/RestaurantSection/RestaurantPage";
 
 function Router() {
@@ -35,7 +35,7 @@ function Router() {
         </Route>
 
         <Route exact path="/addadress">
-          <AddAdressPage />
+          <AddAddressPage />
         </Route>
 
         <Route exact path="/profile">

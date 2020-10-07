@@ -36,6 +36,8 @@ import {
   Button,
   EmptyCart,
 } from "./styles";
+import { goToCart, goToFeed, goToProfile } from "../../router/goToPages";
+import { useHistory } from "react-router-dom";
 
 function CartPage() {
   // Estado
@@ -136,6 +138,9 @@ function CartPage() {
     setChecked(!checked);
   };
 
+  // history
+  const history = useHistory()
+
   return (
     <BaseFlex>
       {/* Intro */}
@@ -211,13 +216,13 @@ function CartPage() {
           className={classes.root}
         >
           <BottomNavigationAction
-            icon={<HomeOutlinedIcon fontSize="large" />}
+            icon={<HomeOutlinedIcon fontSize="large" onClick={() => goToFeed(history)}/>}
           />
           <BottomNavigationAction
-            icon={<ShoppingCartOutlinedIcon fontSize="large" />}
+            icon={<ShoppingCartOutlinedIcon fontSize="large" onClick={() => goToCart(history)} />}
           />
           <BottomNavigationAction
-            icon={<PersonOutlineOutlinedIcon fontSize="large" />}
+            icon={<PersonOutlineOutlinedIcon fontSize="large" onClick={() => goToProfile(history)} />}
           />
         </BottomNavigation>
       </ThemeProvider>

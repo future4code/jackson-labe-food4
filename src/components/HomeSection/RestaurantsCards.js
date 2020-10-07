@@ -1,4 +1,5 @@
 import React from "react";
+import { goToRestaurant } from "../../router/goToPages";
 import {
   BoxCard,
   BoxInside,
@@ -7,8 +8,10 @@ import {
   ContainerInfos,
   InfoText,
 } from "./styles";
+import { useHistory } from "react-router-dom";
 
 export default function RestaurantsCards({ item }) {
+  const history = useHistory();
   const {
     id,
     name,
@@ -19,7 +22,7 @@ export default function RestaurantsCards({ item }) {
     shipping,
   } = item;
   return (
-    <BoxCard key={id}>
+    <BoxCard key={id} onClick={() => goToRestaurant(history, id)}>
       <BoxInside>
         <ImgBox src={logoUrl} />
         <RestaurantName>{name}</RestaurantName>

@@ -3,7 +3,7 @@ import styled from "styled-components";
 // ====== CARROSEL MENU + HEADER ======
 // Div Externa
 export const ExtDivCarousel = styled.div`
-  width: 100vw;
+  width: 90vw;
 `;
 
 export const ContainerCat = styled.div`

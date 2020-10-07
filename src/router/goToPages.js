@@ -22,6 +22,6 @@ export const goToProfile = (history) => {
   history.push(`/profile`);
 };
 
-export const goToRestaurant = (history) => {
-  history.push(`/restaurant`);
+export const goToRestaurant = (history, id) => {
+  history.push(`/restaurant/${id}`);
 };

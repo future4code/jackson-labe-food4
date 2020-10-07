@@ -49,10 +49,9 @@ function CartPage() {
   const useStyles = makeStyles({
     root: {
       width: 350,
-      position: "absolute",
+      position: "fixed",
       bottom: 0,
       marginLeft: 20,
-      marginTop: 20,
     },
   });
 
@@ -174,7 +173,11 @@ function CartPage() {
 
       {/* Pagamento */}
       <TaxBox>
-        <FreteText>Frete R${infos.shipping}</FreteText>
+        {order === null ? (
+          <FreteText>Frete R$0,00</FreteText>
+        ) : (
+          <FreteText>Frete R${infos.shipping}</FreteText>
+        )}
       </TaxBox>
       <SubTotal>
         <SubTotalText>SUBTOTAL</SubTotalText>

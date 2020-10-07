@@ -6,18 +6,10 @@ import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Search from "@material-ui/icons/Search";
 import UpperMenuCat from "./UpperMenuCat";
+import NavBottom from "./NavBottom";
+import { AllContainer } from "./styles";
 
 import styled from "styled-components";
-
-import {
-  ExtDivCarousel,
-  DivItem,
-  MediumTitle,
-  InsideDiv,
-  InsideDivScroll,
-  Body,
-  DivContent,
-} from "./styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -91,7 +83,7 @@ const Feed = () => {
       });
 
   return (
-    <div>
+    <AllContainer>
       <BoxTitle>
         <TitleCompany>Rappi4</TitleCompany>
       </BoxTitle>
@@ -115,24 +107,15 @@ const Feed = () => {
 
         {/* Carrosel */}
 
-        <Body>
-          <ExtDivCarousel>
-            <DivItem className="item">
-              <InsideDiv>
-                <DivContent>
-                  <UpperMenuCat
-                    setInputCategories={setInputCategories}
-                    categories={categories}
-                  />
-                </DivContent>
-              </InsideDiv>
-              <InsideDivScroll></InsideDivScroll>
-            </DivItem>
-          </ExtDivCarousel>
-        </Body>
+        <UpperMenuCat
+          setInputCategories={setInputCategories}
+          categories={categories}
+        />
+
         {renderCards()}
+        <NavBottom />
       </BaseFlex>
-    </div>
+    </AllContainer>
   );
 };
 

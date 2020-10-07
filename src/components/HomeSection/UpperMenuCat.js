@@ -1,21 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import styled from "styled-components";
-
-const ContainerCat = styled.div`
-  display: flex;
-`;
-const ParagrafCat = styled.p`
-  margin: 3px;
-  padding: 3px;
-  :hover {
-    color: #ed1212;
-    cursor: pointer;
-  }
-`;
+import {
+  ExtDivCarousel,
+  DivItem,
+  InsideDiv,
+  InsideDivScroll,
+  ParagrafCat,
+  ContainerCat,
+} from "./styles";
 
 const UpperMenuCat = ({ categories, setInputCategories }) => {
+  // renderizar menu
   const renderCategories = () =>
     categories.map((item) => {
       return (
@@ -30,7 +26,18 @@ const UpperMenuCat = ({ categories, setInputCategories }) => {
       );
     });
 
-  return <ContainerCat>{renderCategories()}</ContainerCat>;
+  return (
+    // menu renderizado em carrosel
+    <ExtDivCarousel>
+      <DivItem className="item">
+        <InsideDiv>
+          {" "}
+          <ContainerCat>{renderCategories()}</ContainerCat>
+        </InsideDiv>
+        <InsideDivScroll />
+      </DivItem>
+    </ExtDivCarousel>
+  );
 };
 
 export default UpperMenuCat;

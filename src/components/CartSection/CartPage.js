@@ -49,10 +49,9 @@ function CartPage() {
   const useStyles = makeStyles({
     root: {
       width: 350,
-      position: "absolute",
+      position: "fixed",
       bottom: 0,
       marginLeft: 20,
-      marginTop: 20,
     },
   });
 

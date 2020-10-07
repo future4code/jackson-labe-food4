@@ -1,11 +1,23 @@
 import styled from "styled-components";
 
+// ====== CARROSEL MENU + HEADER ======
 // Div Externa
 export const ExtDivCarousel = styled.div`
-  width: 70vw;
+  width: 100vw;
+`;
 
-  @media (max-width: 530px) {
-    width: 100vw;
+export const ContainerCat = styled.div`
+  display: flex;
+`;
+export const ParagrafCat = styled.p`
+  margin: 5px;
+  padding: 3px;
+  font-weight: 500;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  :hover {
+    color: #ed1212;
+    cursor: pointer;
   }
 `;
 
@@ -13,7 +25,7 @@ export const ExtDivCarousel = styled.div`
 export const DivItem = styled.div`
   display: flex;
   overflow-x: auto;
-  height: 60vh;
+  height: 10vh;
   scroll-snap-type: x mandatory;
   --webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
@@ -22,16 +34,12 @@ export const DivItem = styled.div`
   }
   ::-webkit-scrollbar {
     width: 4px;
-    background: #f4f4f4;
+    background: none;
     height: 1px;
   }
 
   ::-webkit-scrollbar-thumb {
     background: none;
-  }
-
-  @media (max-width: 530px) {
-    height: 10vh;
   }
 `;
 
@@ -49,9 +57,9 @@ export const InsideDiv = styled.div`
   background-color: white;
   width: 100%;
   scroll-snap-align: start;
-  pointer-events: none;
-  padding-left: 2rem;
-  padding-top: 2rem;
+  pointer-events: all;
+  padding-left: 1rem;
+  padding-top: 0.875rem;
 `;
 
 export const InsideDivScroll = styled.div`
@@ -74,4 +82,59 @@ export const Body = styled.div`
 export const DivContent = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+// ====== CARD RESTAURANTES ======
+
+export const BoxCard = styled.div`
+  width: 90vw;
+  border: 1px solid #b8b8b8;
+  border-radius: 8px;
+  margin-bottom: 0.875rem;
+  height: 188px;
+`;
+
+export const BoxInside = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const ImgBox = styled.img`
+  width: 100%;
+  height: 120px;
+`;
+
+export const RestaurantName = styled.p`
+  width: 80vw;
+  display: flex;
+  justify-content: flex-start;
+  padding-top: 8px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: #e86e5a;
+  font-size: 1rem;
+  margin: 0;
+`;
+
+export const ContainerInfos = styled.div`
+  width: 80vw;
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const InfoText = styled.p`
+  font-size: 1rem;
+  color: #b8b8b8;
+  margin: 5px 0 0 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+`;
+
+export const AllContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  padding-bottom: 3rem;
+  position: relative;
 `;

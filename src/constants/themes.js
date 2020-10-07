@@ -6,7 +6,18 @@ export const theme = createMuiTheme({
       main: "#e86e5a",
     },
     secondary: {
-      main: "#e86e5a"
-    }
+      main: "#e86e5a",
+    },
+  },
+});
+
+export const themeTwo = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#e86e5a",
+    },
+    secondary: {
+      main: "#e86e5a",
+    },
   },
 });

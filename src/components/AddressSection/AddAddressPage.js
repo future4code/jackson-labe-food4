@@ -100,18 +100,6 @@ function AddAddressPage() {
             fullWidth
             required
           />
-          <TextField
-            /* Valor vindo do input = form estado*/
-            value={form.complement}
-            name={"complement"}
-            onChange={handleInput}
-            label="Complemento"
-            placeholder="Apto. / Bloco"
-            type={"text"}
-            variant={"outlined"}
-            margin={"normal"}
-            fullWidth
-          />
 
           <TextField
             /* Valor vindo do input = form estado*/
@@ -153,6 +141,18 @@ function AddAddressPage() {
             margin={"normal"}
             fullWidth
             required
+          />
+          <TextField
+            /* Valor vindo do input = form estado*/
+            value={form.complement}
+            name={"complement"}
+            onChange={handleInput}
+            label="Complemento"
+            placeholder="Apto. / Bloco"
+            type={"text"}
+            variant={"outlined"}
+            margin={"normal"}
+            fullWidth
           />
 
           <Button

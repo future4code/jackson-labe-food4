@@ -1,7 +1,11 @@
 import styled from "styled-components";
+
 export const ContainerTitle = styled.div`
-  border: 1px solid rgba(0, 0, 0, 0.25);
+  display: flex;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
   width: 100vw;
+  justify-content: space-around;
+  align-items: center;
 `;
 
 export const Title = styled.p`
@@ -10,6 +14,7 @@ export const Title = styled.p`
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   text-align: center;
   font-weight: 600;
+  margin-right: 6rem;
 `;
 
 export const ContainerImg = styled.div`

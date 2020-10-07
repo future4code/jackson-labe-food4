@@ -174,7 +174,11 @@ function CartPage() {
 
       {/* Pagamento */}
       <TaxBox>
-        <FreteText>Frete R${infos.shipping}</FreteText>
+        {order === null ? (
+          <FreteText>Frete R$0,00</FreteText>
+        ) : (
+          <FreteText>Frete R${infos.shipping}</FreteText>
+        )}
       </TaxBox>
       <SubTotal>
         <SubTotalText>SUBTOTAL</SubTotalText>

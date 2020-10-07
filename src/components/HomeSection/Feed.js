@@ -11,7 +11,6 @@ import { AllContainer } from "./styles";
 
 import styled from "styled-components";
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
@@ -46,51 +45,44 @@ const Feed = () => {
   const getRestaurant = useRequestData([], "restaurants");
   const classes = useStyles();
 
-    const [inputRestaurant, setInputRestaurant] = useState('')
-    const [inputCategories, setInputCategories] = useState('')
-    const [categories, setCategories] = useState([])
-    const [showMenu, setShowMenu] = useState(true)
-    const [showSearch, setShowSearch] = useState(false)
-    const [showRender, setShowRender] = useState(true)
-    const [restaurants, setRestaurants] = useState({})
+  const [inputRestaurant, setInputRestaurant] = useState("");
+  const [inputCategories, setInputCategories] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [showMenu, setShowMenu] = useState(true);
+  const [showSearch, setShowSearch] = useState(false);
+  const [showRender, setShowRender] = useState(true);
+  const [restaurants, setRestaurants] = useState({});
 
-    const menu = () => {
-      setShowMenu(false)
-      setShowSearch(true)
-      setShowRender(false)
-      setInputRestaurant('')
-    }
+  const menu = () => {
+    setShowMenu(false);
+    setShowSearch(true);
+    setShowRender(false);
+    setInputRestaurant("");
+  };
 
-    const offMenu = () => {
-      setShowMenu(true)
-      setShowSearch(false)
-      setInputRestaurant('')
-    }
-  
+  const offMenu = () => {
+    setShowMenu(true);
+    setShowSearch(false);
+    setInputRestaurant("");
+  };
 
-    const handleInput = (e) => {
-      setInputRestaurant(e.target.value.toLowerCase()) 
-      setShowRender(true)     
-    }
-    
-        
-    
-    const getCategories = () => {
-      
-      getRestaurant.map(item => {
-        let hasCat = false
-        categories.map(cat => {
-          if (cat === item.category){
-            hasCat = true
-          }
-          
-        })  
-        if (hasCat === false){
-          let categoriesArray = [...categories, item.category]
-          setCategories(categoriesArray)
-          
+  const handleInput = (e) => {
+    setInputRestaurant(e.target.value.toLowerCase());
+    setShowRender(true);
+  };
 
-
+  const getCategories = () => {
+    getRestaurant.map((item) => {
+      let hasCat = false;
+      categories.map((cat) => {
+        if (cat === item.category) {
+          hasCat = true;
+        }
+      });
+      if (hasCat === false) {
+        let categoriesArray = [...categories, item.category];
+        setCategories(categoriesArray);
+      }
     });
   };
 
@@ -131,13 +123,15 @@ const Feed = () => {
           />
         </form>
 
-{showSearch && <p>Busque por nome do Restaurante</p>}
- {showMenu && <UpperMenuCat
-      setInputCategories={setInputCategories}
-      categories={categories}
-    />}
+        {showSearch && <p>Busque por nome do Restaurante</p>}
+        {showMenu && (
+          <UpperMenuCat
+            setInputCategories={setInputCategories}
+            categories={categories}
+          />
+        )}
 
-            {showRender && renderCards()}
+        {showRender && renderCards()}
 
         <NavBottom />
       </BaseFlex>

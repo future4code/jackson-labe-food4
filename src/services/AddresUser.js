@@ -5,18 +5,18 @@ import { BASE_URL } from "../constants/urls";
 
 export const addresUserCard = (body, history) => {
   axios
-    .post(`${BASE_URL}/address`, body, {
+    .put(`${BASE_URL}address`, body, {
       headers: {
-        Authorization: localStorage.getItem("token"),
+        auth: localStorage.getItem("token"),
       },
     })
     .then((response) => {
       //envia token
-      localStorage.setItem("token", response.data.token);
-
+      localStorage.setItem("tokenAddres", response.data.tokenAddres);
       goToFeed(history);
     })
     .catch((error) => {
       alert("Endereço não adicionado, por favor tente novamente");
+      console.log(error);
     });
 };

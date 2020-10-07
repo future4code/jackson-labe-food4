@@ -7,7 +7,7 @@ export const goToSignUpPage = (history) => {
 };
 
 export const goToFeed = (history) => {
-  history.push("/feed");
+  history.push(`/feed`);
 };
 
 export const goToCart = (history) => {

@@ -98,3 +98,10 @@ export const Messagem = styled.div`
   text-align: center;
   margin-top: 28px;
 `;
+
+export const ContainerFooter = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 41vh;
+`;

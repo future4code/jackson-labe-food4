@@ -47,6 +47,10 @@ function Router() {
           <ProfilePage />
         </Route>
 
+        <Route exact path="/EditProfile">
+          <EditProfile />
+        </Route>
+
         <Route exact path="/restaurant">
           <RestaurantPage />
         </Route>

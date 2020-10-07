@@ -35,6 +35,7 @@ import {
   LabelCheckBox,
   Button,
   EmptyCart,
+  BaseFlexNav,
 } from "./styles";
 import { goToCart, goToFeed, goToProfile } from "../../router/goToPages";
 import { useHistory } from "react-router-dom";
@@ -53,7 +54,6 @@ function CartPage() {
       width: 350,
       position: "fixed",
       bottom: 0,
-      marginLeft: 20,
     },
   });
 
@@ -138,7 +138,7 @@ function CartPage() {
   };
 
   // history
-  const history = useHistory()
+  const history = useHistory();
 
   return (
     <BaseFlex>
@@ -209,26 +209,43 @@ function CartPage() {
       <Button>Confirmar</Button>
 
       {/* Botton Nav */}
-      <ThemeProvider theme={theme}>
-        <BottomNavigation
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-          showLabels
-          className={classes.root}
-        >
-          <BottomNavigationAction
-            icon={<HomeOutlinedIcon fontSize="large" onClick={() => goToFeed(history)}/>}
-          />
-          <BottomNavigationAction
-            icon={<ShoppingCartOutlinedIcon fontSize="large" onClick={() => goToCart(history)} />}
-          />
-          <BottomNavigationAction
-            icon={<PersonOutlineOutlinedIcon fontSize="large" onClick={() => goToProfile(history)} />}
-          />
-        </BottomNavigation>
-      </ThemeProvider>
+      <BaseFlexNav>
+        <ThemeProvider theme={theme}>
+          <BottomNavigation
+            value={value}
+            onChange={(event, newValue) => {
+              setValue(newValue);
+            }}
+            showLabels
+            className={classes.root}
+          >
+            <BottomNavigationAction
+              icon={
+                <HomeOutlinedIcon
+                  fontSize="large"
+                  onClick={() => goToFeed(history)}
+                />
+              }
+            />
+            <BottomNavigationAction
+              icon={
+                <ShoppingCartOutlinedIcon
+                  fontSize="large"
+                  onClick={() => goToCart(history)}
+                />
+              }
+            />
+            <BottomNavigationAction
+              icon={
+                <PersonOutlineOutlinedIcon
+                  fontSize="large"
+                  onClick={() => goToProfile(history)}
+                />
+              }
+            />
+          </BottomNavigation>
+        </ThemeProvider>
+      </BaseFlexNav>
     </BaseFlex>
   );
 }

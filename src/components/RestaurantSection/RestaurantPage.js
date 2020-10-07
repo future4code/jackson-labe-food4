@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import ProductDetail from "../../components/CartSection/ProductDetail";
 import { useHistory, useParams } from "react-router-dom";
-
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import axios from "axios";
+
 import {
   ContainerTitle,
   Title,
@@ -16,7 +16,10 @@ import {
   TextPrincipal,
 } from "./styles";
 
+import { goToFeed } from "../../router/goToPages";
+
 function RestaurantPage() {
+  const history = useHistory();
   const pathParams = useParams();
   const [productsCat, setProductsCat] = useState([]);
   const [restaurant, setRestaurant] = useState("");
@@ -60,6 +63,7 @@ function RestaurantPage() {
   return (
     <ContainerAll>
       <ContainerTitle>
+        <ArrowBackIosIcon onClick={() => goToFeed(history)} />
         <Title>Restaurante</Title>
       </ContainerTitle>
       <ContainerImg>

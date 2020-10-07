@@ -7,6 +7,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
+
 import LogoRappi4 from "./logo-future-eats-invert.png";
 import {
   FormContainer,
@@ -19,6 +20,7 @@ import { theme } from "../../constants/themes";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import axios from "axios";
+
 import { BASE_URL } from "../../constants/urls";
 
 function LoginPage() {

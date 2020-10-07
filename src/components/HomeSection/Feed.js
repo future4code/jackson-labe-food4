@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import useRequestData from '../../services/useRequestData'
 import RestaurantsCards from './RestaurantsCards'
 import { makeStyles } from '@material-ui/core/styles';
@@ -23,9 +23,28 @@ const Feed = () => {
     const [inputRestaurant, setInputRestaurant] = useState('')
     const [inputCategories, setInputCategories] = useState('')
     const [categories, setCategories] = useState([])
+    const [showMenu, setShowMenu] = useState(true)
+    const [showSearch, setShowSearch] = useState(false)
+    const [showRender, setShowRender] = useState(true)
+    const [restaurants, setRestaurants] = useState({})
+
+    const menu = () => {
+      setShowMenu(false)
+      setShowSearch(true)
+      setShowRender(false)
+      setInputRestaurant('')
+    }
+
+    const offMenu = () => {
+      setShowMenu(true)
+      setShowSearch(false)
+      setInputRestaurant('')
+    }
+  
 
     const handleInput = (e) => {
-      setInputRestaurant(e.target.value.toLowerCase())      
+      setInputRestaurant(e.target.value.toLowerCase()) 
+      setShowRender(true)     
     }
     
         
@@ -61,7 +80,7 @@ const Feed = () => {
           return item.name.toLowerCase().indexOf(inputRestaurant) >= 0
         })  
         .map((item) => {
-            return (
+          return (
             <RestaurantsCards
               key={item.id}
               item={item}
@@ -69,7 +88,6 @@ const Feed = () => {
           )
         })
     )
-  
 
   return(
 
@@ -81,6 +99,10 @@ const Feed = () => {
       label="Restaurantes" 
       variant="outlined"
       onChange={handleInput}
+      onFocus={() => menu()}
+      onBlur={() => offMenu(true)}
+      
+
       type="text"
       InputProps={{
           startAdornment: (
@@ -91,11 +113,14 @@ const Feed = () => {
         }}
       />
     </form>
-    <UpperMenuCat
+    {showSearch && <p>Busque por nome do Restaurante</p>}
+    {showMenu && <UpperMenuCat
       setInputCategories={setInputCategories}
       categories={categories}
-    />
-    {renderCards()}
+    />}
+  {/* {restaurants.length === 0 ? <p>{restaurants.length}</p> : <p>Não encontramos :(</p>} */}
+    
+    {showRender && renderCards()}
 
     
     </div>

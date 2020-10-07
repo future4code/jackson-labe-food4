@@ -134,8 +134,8 @@ function SignUpPage() {
           <TextField 
             value={ConfirmarSenha}
             onChange={setConfirmarSenha}
-            label="Senha"
-            placeholder="Mínimo 6 caracteres"
+            label="Confirmar senha"
+            placeholder="Confirmar senha"
             type={showPassword ? "text" : "password" }
             variant="outlined"
             margin="dense"

@@ -5,16 +5,14 @@ import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import PersonOutlineOutlinedIcon from "@material-ui/icons/PersonOutlineOutlined";
-import LinearProgress from "@material-ui/core/LinearProgress";
 import { theme } from "./../../constants/themes";
 import { makeStyles } from "@material-ui/core/styles";
+import { goToCart, goToFeed, goToProfile } from "../../router/goToPages";
 import { useHistory } from "react-router-dom";
-import { goToCart } from "../../router/goToPages";
 
 const NavBottom = () => {
   const [value, setValue] = useState(0);
   const history = useHistory();
-
   const useStyles = makeStyles({
     root: {
       width: 350,
@@ -36,13 +34,29 @@ const NavBottom = () => {
         showLabels
         className={classes.root}
       >
-        <BottomNavigationAction icon={<HomeOutlinedIcon fontSize="large" />} />
         <BottomNavigationAction
-          onClick={() => goToCart(history)}
-          icon={<ShoppingCartOutlinedIcon fontSize="large" />}
+          icon={
+            <HomeOutlinedIcon
+              fontSize="large"
+              onClick={() => goToFeed(history)}
+            />
+          }
         />
         <BottomNavigationAction
-          icon={<PersonOutlineOutlinedIcon fontSize="large" />}
+          icon={
+            <ShoppingCartOutlinedIcon
+              onClick={() => goToCart(history)}
+              fontSize="large"
+            />
+          }
+        />
+        <BottomNavigationAction
+          icon={
+            <PersonOutlineOutlinedIcon
+              onClick={() => goToProfile(history)}
+              fontSize="large"
+            />
+          }
         />
       </BottomNavigation>
     </ThemeProvider>

@@ -47,7 +47,7 @@ function Router() {
           <ProfilePage />
         </Route>
 
-        <Route exact path="/restaurant">
+        <Route exact path="/restaurant/:id">
           <RestaurantPage />
         </Route>
       </Switch>

@@ -3,7 +3,7 @@ import {Button, InputAdornment, TextField, ThemeProvider, Typography} from '@mat
 import { useHistory } from "react-router-dom";
 import LogoRappi4 from "./logo-future-eats-invert.png"
 import {FormContainer, LinkCadastro, Container, LogoRappi, Text} from './styled-LoginPage'
-import theme from "../../constants/themes";
+import {theme} from "../../constants/themes"
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import axios from 'axios'

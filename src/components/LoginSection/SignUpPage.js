@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { TextField, ThemeProvider, InputAdornment, Button } from '@material-ui/core'
-import theme from "../../constants/themes";
+import {theme} from "../../constants/themes";
 import LogoRappi4 from "./logo-future-eats-invert.png"
 import { Container, FormContainer, LogoRappi, Text } from "./styled-LoginPage";
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';

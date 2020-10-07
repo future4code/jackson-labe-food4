@@ -13,12 +13,17 @@ import ProfilePage from "../components/ProfileSection/ProfilePage";
 import EditProfile from "../components/ProfileSection/EditProfile";
 import EditAddress from "../components/ProfileSection/EditAddress";
 import RestaurantPage from "../components/RestaurantSection/RestaurantPage";
+import SplashScreen from "../components/SplashScreen/SplashScreen";
 
 function Router() {
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
+          <SplashScreen />
+        </Route>
+
+        <Route exact path="/Login">
           <LoginPage />
         </Route>
 

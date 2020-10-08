@@ -50,18 +50,19 @@ function LoginPage() {
       password: Senha,
     };
 
-    const request = await axios
-      .post(`${BASE_URL}login`, body)
-      .then((res) => {
-        console.log(res);
-        window.localStorage.setItem("token", res.data.token);
-        history.push("/feed");
-      })
-      .catch((err) => {
-        setEmail("");
-        setSenha("");
-        console.log(err);
-      });
+    try {
+      const response = await axios.post(`${BASE_URL}login`, body)
+
+      localStorage.setItem("token", response.data.token);
+
+      history.push("/feed");
+    } catch (error) {
+      alert("Login falhou :( , tente novamente!")
+      setEmail("");
+      setSenha("");
+      console.error(error);
+
+    }
   };
 
   const irParaCadastro = () => {
@@ -74,7 +75,7 @@ function LoginPage() {
         <LogoRappi src={LogoRappi4} />
         <Text>Entrar</Text>
 
-        <FormContainer>
+        <FormContainer onSubmit={fazerLogin}>
           <TextField
             value={Email}
             onChange={onChangeEmail}
@@ -110,8 +111,7 @@ function LoginPage() {
             }}
           />
           <Button
-            type="submit"
-            onClick={fazerLogin}
+            type="submit"           
             color="secondary"
             variant="contained"
           >

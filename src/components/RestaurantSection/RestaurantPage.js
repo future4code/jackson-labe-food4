@@ -94,6 +94,8 @@ function RestaurantPage() {
             {productArray.map((product) => {
               return (
                 <ProductDetail
+                  products={products}
+                  id={product.id}
                   name={product.name}
                   description={product.description}
                   photo={product.photoUrl}

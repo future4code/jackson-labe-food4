@@ -1,124 +1,31 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import React, { useState } from "react";
+
+// Import Material
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import { createMuiTheme } from "@material-ui/core/styles";
-import { useForm } from "../../services/useForm";
 import Button from "@material-ui/core/Button";
 
-const Container = styled.div`
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 8px;
-  margin-top: 1rem;
-`;
+// Hooks
+import { useForm } from "../../services/useForm";
+import {
+  Container,
+  CardBox,
+  BoxImg,
+  ContainerInfos,
+  ProductName,
+  ProductTitle,
+  ProductPrice,
+  CounterProduct,
+  ButtonProduct,
+  ModalContainer,
+  ModalTitle,
+} from "./styles";
 
-const CardBox = styled.div`
-  width: 90vw;
-  border-radius: 8px;
-  border: solid 1px #b8b8b8;
-  display: flex;
-  height: 112px;
-`;
-
-const BoxImg = styled.img`
-  width: 97px;
-  height: 113px;
-`;
-
-const ContainerInfos = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-left: 1rem;
-  padding-top: 12px;
-  position: relative;
-  width: 100vw;
-`;
-
-const ProductName = styled.p`
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  color: #e86e5a;
-  margin: 0 0 6px 0;
-  font-size: 1rem;
-  width: 50vw;
-`;
-
-const ProductTitle = styled.p`
-  color: #b8b8b8;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-
-  font-size: 0.875rem;
-  margin: 0 0 6px 0;
-`;
-
-const ProductPrice = styled(ProductName)`
-  color: black;
-  margin-bottom: 15px;
-`;
-
-const CounterProduct = styled.div`
-  width: 33px;
-  height: 33px;
-  border-bottom-left-radius: 8px;
-  border-top-right-radius: 8px;
-  border: solid 1px #e86e5a;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: red;
-  position: absolute;
-  top: 0;
-  right: 0;
-`;
-
-const ButtonProduct = styled.button`
-  padding: 5px;
-  width: 25vw;
-  border-bottom-right-radius: 8px;
-  border-top-left-radius: 8px;
-  border: solid 1px #e86e5a;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: red;
-  background: none;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-
-  &:focus {
-    outline: none;
-  }
-`;
-
-export const BaseModalContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-`;
-
-export const ModalContainer = styled.div`
-  width: 90vw;
-  height: 50vw;
-  background: white;
-`;
-
-export const ModalTitle = styled.p`
-  text-align: center;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  color: black;
-  font-size: 1rem;
-  margin-bottom: 2rem;
-`;
-
+// function posicionamento modal material
 function getModalStyle() {
   const top = 50;
   const left = 50;
@@ -130,6 +37,7 @@ function getModalStyle() {
   };
 }
 
+// styles em classe pro material
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
@@ -151,14 +59,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ProductDetail(props) {
+  // states
+  const [open, setOpen] = useState(false);
+  const [carrinho, setCarrinho] = useState([]);
+  const [quantidade, setQuantidade] = useState(0);
+
+  // ====== MODAL ======
+
   // edit material-ui
   const classes = useStyles();
 
   // modal style
   const [modalStyle] = useState(getModalStyle);
-
-  // state open/close modal
-  const [open, setOpen] = useState(false);
 
   // color theme to select
   const theme = createMuiTheme({
@@ -193,6 +105,52 @@ function ProductDetail(props) {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     onChange(name, value);
+    console.log(form.quantidade);
+  };
+
+  // ====== ADICIONAR AO CARRINHO ======
+
+  const onClickCarrinho = (id) => {
+    let newCart = [...carrinho];
+
+    // Se tiver um produto encontrado no array e esse id for igual ao do produto
+    const addProduct = props.products.map((produto) => {
+      if (id === produto.id) {
+        newCart.push({
+          name: produto.name,
+          price: produto.price,
+          description: produto.description,
+        });
+      }
+      return false;
+    });
+
+    if (addProduct === undefined) {
+      console.error("Produto inválido");
+      return;
+    }
+
+    const foundProductInCart = newCart.map((item) => {
+      if (id === item.id) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+
+    if (foundProductInCart === undefined) {
+      const newProduct = setQuantidade(1);
+      newCart = [newProduct, ...newCart];
+    } else {
+      newCart = newCart.map((item) => {
+        if (id === item.id) {
+          return setQuantidade(quantidade + 1);
+        } else {
+          return item;
+        }
+      });
+    }
+    setCarrinho(newCart);
   };
 
   // modal body
@@ -209,6 +167,7 @@ function ProductDetail(props) {
             Quantidade
           </InputLabel>
           <Select
+            native
             value={form.quantidade}
             className={classes.root}
             label="Quantidade"
@@ -217,7 +176,7 @@ function ProductDetail(props) {
             required
           >
             {/* Options */}
-            <option aria-label="None" value="" />
+            <option value={0} />
             <option value={1}>1</option>
             <option value={2}>2</option>
             <option value={3}>3</option>
@@ -229,13 +188,21 @@ function ProductDetail(props) {
             <option value={9}>9</option>
             <option value={10}>10</option>
           </Select>
-          <Button type="submit" color="primary" className={classes.margin}>
+          <Button
+            type="submit"
+            color="primary"
+            className={classes.margin}
+            onClick={() => onClickCarrinho(props.id)}
+          >
             adicionar ao carrinho
           </Button>
         </FormControl>
       </ThemeProvider>
     </ModalContainer>
   );
+
+  console.log(carrinho);
+  console.log(props.id);
 
   return (
     <Container>
@@ -246,19 +213,14 @@ function ProductDetail(props) {
         {/* Container Informações Gerais */}
         <ContainerInfos>
           {/* Infos */}
-          <CounterProduct>0</CounterProduct>
+          <CounterProduct>{form.quantidade}</CounterProduct>
           <ProductName>{props.name}</ProductName>
           <ProductTitle>{props.description}</ProductTitle>
           <ProductPrice>R${props.price}</ProductPrice>
           <ButtonProduct type="button" onClick={handleOpen}>
             Adicionar
           </ButtonProduct>
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description"
-          >
+          <Modal open={open} onClose={handleClose}>
             {body}
           </Modal>
         </ContainerInfos>

@@ -2,20 +2,19 @@ import axios from "axios";
 import { goToProfile } from "../router/goToPages";
 import { BASE_URL } from "../constants/urls";
 
-//edição de usuário
-export const editUser = (body, history) => {
+//Bate na api de editar endereço
+export const editAddresProfile = (body, history) => {
   axios
-    .put(`${BASE_URL}profile`, body, {
+    .put(`${BASE_URL}address`, body, {
       headers: {
         auth: localStorage.getItem("token"),
       },
     })
     .then((response) => {
-      console.log(response, "response editeprofile");
       goToProfile(history);
     })
     .catch((error) => {
-      alert("Perfil não atualizado, por favor tente novamente");
+      alert("Endereço não adicionado, por favor tente novamente");
       console.log(error);
     });
 };

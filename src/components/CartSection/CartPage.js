@@ -42,7 +42,7 @@ import { useHistory } from "react-router-dom";
 
 function CartPage() {
   // Estado
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState("cart");
   const [checked, setChecked] = useState(false);
   const [order, setOrder] = useState({});
   const [address, setAddress] = useState(null);
@@ -228,6 +228,7 @@ function CartPage() {
               }
             />
             <BottomNavigationAction
+              value="cart"
               icon={
                 <ShoppingCartOutlinedIcon
                   fontSize="large"

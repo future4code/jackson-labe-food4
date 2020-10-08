@@ -2,14 +2,16 @@ import React, { useState, useEffect } from "react";
 import useRequestData from "../../services/useRequestData";
 import RestaurantsCards from "./RestaurantsCards";
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
+import {TextField, ThemeProvider} from "@material-ui/core";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Search from "@material-ui/icons/Search";
 import UpperMenuCat from "./UpperMenuCat";
 import NavBottom from "./NavBottom";
 import { AllContainer } from "./styles";
+import { theme } from "../../constants/themes";
 
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,6 +46,7 @@ const BaseFlex = styled.div`
 const Feed = () => {
   const getRestaurant = useRequestData([], "restaurants");
   const classes = useStyles();
+  const history = useHistory()
 
   const [inputRestaurant, setInputRestaurant] = useState("");
   const [inputCategories, setInputCategories] = useState("");
@@ -51,7 +54,7 @@ const Feed = () => {
   const [showMenu, setShowMenu] = useState(true);
   const [showSearch, setShowSearch] = useState(false);
   const [showRender, setShowRender] = useState(true);
-  const [restaurants, setRestaurants] = useState({});
+  const [restaurants, setRestaurants] = useState([]);
 
   const menu = () => {
     setShowMenu(false);
@@ -63,7 +66,8 @@ const Feed = () => {
   const offMenu = () => {
     setShowMenu(true);
     setShowSearch(false);
-    setInputRestaurant("");
+  
+    setShowRender(true)
   };
 
   const handleInput = (e) => {
@@ -88,8 +92,8 @@ const Feed = () => {
 
   getCategories();
 
-  const renderCards = () =>
-    getRestaurant
+  const renderCards = () => 
+      getRestaurant
       .filter((item) => {
         return item.category.indexOf(inputCategories) >= 0;
       })
@@ -98,21 +102,34 @@ const Feed = () => {
       })
       .map((item) => {
         return <RestaurantsCards key={item.id} item={item} />;
-      });
+      })
+    
+  useEffect(() => {
+    if(localStorage.getItem("token") === null) {
+      history.push("/")
+    }
+  }, [])  
 
   return (
-    <AllContainer>
+    <ThemeProvider theme={theme}>
+
+    <AllContainer >
       <BoxTitle>
         <TitleCompany>Rappi4</TitleCompany>
       </BoxTitle>
       <BaseFlex>
         <form className={classes.root} noValidate autoComplete="off">
           <TextField
+            
             id="outlined-basic"
             label="Restaurantes"
             variant="outlined"
             onChange={handleInput}
+            onFocus={() => menu()}
+            onBlur={() => offMenu()}
             type="text"
+            color="secondary"
+            margin="dense"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -136,6 +153,7 @@ const Feed = () => {
         <NavBottom />
       </BaseFlex>
     </AllContainer>
+    </ThemeProvider>
   );
 };
 

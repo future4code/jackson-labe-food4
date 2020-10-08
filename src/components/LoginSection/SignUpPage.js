@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { TextField, ThemeProvider, InputAdornment, Button } from '@material-ui/core'
 import {theme} from "../../constants/themes";
 import LogoRappi4 from "./logo-future-eats-invert.png"
@@ -32,6 +32,13 @@ function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false)
   const patt = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/
 
+  /* protege a pagina */
+  useEffect(() => {
+    if(localStorage.getItem("token") !== null) {
+      history.push("/feed")
+    }
+  }, [])
+
   /* mostra ou esconde o icone da senha */
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword)
@@ -39,9 +46,8 @@ function SignUpPage() {
 
   
   /* requisição para fazer cadastro */
-  const Cadastro = async (e) => {
-    e.preventDefault()
-
+  const Cadastro = async () => {
+  
     const body = {
       name: nome,
       email: Email,
@@ -49,25 +55,29 @@ function SignUpPage() {
       password: Senha
     }
 
-    const request = await axios.post(`${BASE_URL}signup`, body)
-    .then(res => {
-      window.localStorage.setItem("token", res.data.token)
+    try {
+      const request = await axios.post(`${BASE_URL}signup`, body)
+
+      localStorage.setItem("token", request.data.token)
+
       history.push("/addadress")
-    })
-    .catch(err => {
-      alert(err.response.data.message)
-    })
+    } catch (error) {
+      alert("Cadastro falhou :(, tente novamente!")
+      console.error(error)
+    }
+
   }
 
   /* Verifica se as senhas são diferentes */ 
   /* Verifica o tamanho do cpf */
 
-  const fazerCadastro = () => {
+  const fazerCadastro = (e) => {
+    e.preventDefault()
 
     if(patt.test(CPF) && Senha === ConfirmarSenha){
       Cadastro()
     } else {
-      alert("CPF inválido")
+      alert("CPF ou senha inválidos")
       return
     }
   }
@@ -78,7 +88,7 @@ function SignUpPage() {
       <Container>
         <LogoRappi src={LogoRappi4} />      
         <Text>Cadastrar</Text>
-        <FormContainer>
+        <FormContainer onSubmit={fazerCadastro}>
           <TextField 
             value={nome}
             onChange={setNome}
@@ -150,7 +160,7 @@ function SignUpPage() {
             }}     
           />
 
-        <Button type="submit" onClick={fazerCadastro} color="secondary" variant="contained">Criar</Button>
+        <Button type="submit" color="secondary" variant="contained">Criar</Button>
         </FormContainer>
       </Container>
     </ThemeProvider>

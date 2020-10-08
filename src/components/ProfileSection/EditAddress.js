@@ -1,8 +1,12 @@
-import React from "react";
+
 import { useHistory } from "react-router-dom";
 import { TextField, Button, ThemeProvider } from "@material-ui/core";
 import useForm from "../../Hooks/useForm";
 import { editAddresProfile } from "../../services/PutEnderecoProfile";
+import React, {useEffect} from "react";
+import { useHistory } from 'react-router-dom'
+
+
 
 import { theme } from "../../constants/themes";
 import styled from "styled-components";
@@ -36,6 +40,8 @@ const Title = styled.div`
 
 function EditAddress() {
   const history = useHistory();
+  
+  
 
   const [form, handleInput] = useForm({
     street: "",
@@ -59,6 +65,12 @@ function EditAddress() {
     }
     console.log(form, "form do adrres aqui");
   };
+  
+  useEffect(() => {
+    if(localStorage.getItem("token") === null) {
+      history.push("/")
+    }
+  }, [])
 
   return (
     <ThemeProvider theme={theme}>

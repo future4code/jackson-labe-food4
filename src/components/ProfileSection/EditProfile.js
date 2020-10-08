@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useHistory } from "react-router-dom";
 import { TextField, Button, ThemeProvider } from "@material-ui/core";
 import useForm from "../../Hooks/useForm";
@@ -56,6 +56,12 @@ function EditProfile() {
     }
     console.log(form, "form do adrres aqui");
   };
+
+  useEffect(() => {
+    if(localStorage.getItem("token") === null) {
+      history.push("/")
+    }
+  }, [])  
 
   return (
     <ThemeProvider theme={theme}>

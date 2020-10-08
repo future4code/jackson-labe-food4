@@ -68,3 +68,10 @@ export const Principal = styled.div`
 export const TextPrincipal = styled(Title)`
   text-align: start;
 `;
+
+export const ContainerProduct = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+`;

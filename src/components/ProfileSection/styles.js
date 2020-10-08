@@ -143,3 +143,11 @@ export const ContainerFooter = styled.div`
   justify-content: space-evenly;
   margin-top: 10vh;
 `;
+
+export const BaseFlex = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  position: relative;
+  align-items: center;
+`;

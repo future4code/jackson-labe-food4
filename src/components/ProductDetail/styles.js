@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-const Container = styled.div`
+export const Container = styled.div`
   width: 100vw;
   display: flex;
   justify-content: center;
@@ -9,7 +8,7 @@ const Container = styled.div`
   margin-top: 1rem;
 `;
 
-const CardBox = styled.div`
+export const CardBox = styled.div`
   width: 90vw;
   border-radius: 8px;
   border: solid 1px #b8b8b8;
@@ -17,12 +16,12 @@ const CardBox = styled.div`
   height: 112px;
 `;
 
-const BoxImg = styled.img`
+export const BoxImg = styled.img`
   width: 97px;
   height: 113px;
 `;
 
-const ContainerInfos = styled.div`
+export const ContainerInfos = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 1rem;
@@ -31,7 +30,7 @@ const ContainerInfos = styled.div`
   width: 100vw;
 `;
 
-const ProductName = styled.p`
+export const ProductName = styled.p`
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   color: #e86e5a;
@@ -40,7 +39,7 @@ const ProductName = styled.p`
   width: 50vw;
 `;
 
-const ProductTitle = styled.p`
+export const ProductTitle = styled.p`
   color: #b8b8b8;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -49,12 +48,12 @@ const ProductTitle = styled.p`
   margin: 0 0 6px 0;
 `;
 
-const ProductPrice = styled(ProductName)`
+export const ProductPrice = styled(ProductName)`
   color: black;
   margin-bottom: 15px;
 `;
 
-const CounterProduct = styled.div`
+export const CounterProduct = styled.div`
   width: 33px;
   height: 33px;
   border-bottom-left-radius: 8px;
@@ -69,7 +68,7 @@ const CounterProduct = styled.div`
   right: 0;
 `;
 
-const ButtonDelete = styled.button`
+export const ButtonProduct = styled.button`
   padding: 5px;
   width: 25vw;
   border-bottom-right-radius: 8px;
@@ -83,27 +82,30 @@ const ButtonDelete = styled.button`
   position: absolute;
   bottom: 0;
   right: 0;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
-function ProductDetail(props) {
-  return (
-    <Container>
-      {/* Container Produto */}
-      <CardBox>
-        <BoxImg src={props.photo} />
+export const BaseModalContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`;
 
-        {/* Container Informações Gerais */}
-        <ContainerInfos>
-          {/* Infos */}
-          <CounterProduct>0</CounterProduct>
-          <ProductName>{props.name}</ProductName>
-          <ProductTitle>{props.description}</ProductTitle>
-          <ProductPrice>R${props.price}</ProductPrice>
-          <ButtonDelete>Adicionar</ButtonDelete>
-        </ContainerInfos>
-      </CardBox>
-    </Container>
-  );
-}
+export const ModalContainer = styled.div`
+  width: 90vw;
+  height: 50vw;
+  background: white;
+`;
 
-export default ProductDetail;
+export const ModalTitle = styled.p`
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: black;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+`;

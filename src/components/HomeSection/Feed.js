@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import useRequestData from "../../services/useRequestData";
 import RestaurantsCards from "./RestaurantsCards";
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
+import {TextField, ThemeProvider} from "@material-ui/core";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Search from "@material-ui/icons/Search";
 import UpperMenuCat from "./UpperMenuCat";
 import NavBottom from "./NavBottom";
 import { AllContainer } from "./styles";
+import { theme } from "../../constants/themes";
 
 import styled from "styled-components";
 
@@ -104,13 +105,16 @@ const Feed = () => {
     
 
   return (
-    <AllContainer>
+    <ThemeProvider theme={theme}>
+
+    <AllContainer >
       <BoxTitle>
         <TitleCompany>Rappi4</TitleCompany>
       </BoxTitle>
       <BaseFlex>
         <form className={classes.root} noValidate autoComplete="off">
           <TextField
+            
             id="outlined-basic"
             label="Restaurantes"
             variant="outlined"
@@ -118,6 +122,8 @@ const Feed = () => {
             onFocus={() => menu()}
             onBlur={() => offMenu()}
             type="text"
+            color="secondary"
+            margin="dense"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -141,6 +147,7 @@ const Feed = () => {
         <NavBottom />
       </BaseFlex>
     </AllContainer>
+    </ThemeProvider>
   );
 };
 

@@ -15,7 +15,6 @@ import PersonOutlineOutlinedIcon from "@material-ui/icons/PersonOutlineOutlined"
 import LinearProgress from "@material-ui/core/LinearProgress";
 
 // Component
-import ProductDetail from "./ProductDetail";
 
 // Styled
 import {

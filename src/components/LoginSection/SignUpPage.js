@@ -39,9 +39,8 @@ function SignUpPage() {
 
   
   /* requisição para fazer cadastro */
-  const Cadastro = async (e) => {
-    e.preventDefault()
-
+  const Cadastro = async () => {
+  
     const body = {
       name: nome,
       email: Email,
@@ -49,20 +48,24 @@ function SignUpPage() {
       password: Senha
     }
 
-    const request = await axios.post(`${BASE_URL}signup`, body)
-    .then(res => {
-      window.localStorage.setItem("token", res.data.token)
+    try {
+      const request = await axios.post(`${BASE_URL}signup`, body)
+
+      localStorage.setItem("token", request.data.token)
+
       history.push("/addadress")
-    })
-    .catch(err => {
-      alert(err.response.data.message)
-    })
+    } catch (error) {
+      alert("Cadastro falhou :(, tente novamente!")
+      console.error(error)
+    }
+
   }
 
   /* Verifica se as senhas são diferentes */ 
   /* Verifica o tamanho do cpf */
 
-  const fazerCadastro = () => {
+  const fazerCadastro = (e) => {
+    e.preventDefault()
 
     if(patt.test(CPF) && Senha === ConfirmarSenha){
       Cadastro()
@@ -78,7 +81,7 @@ function SignUpPage() {
       <Container>
         <LogoRappi src={LogoRappi4} />      
         <Text>Cadastrar</Text>
-        <FormContainer>
+        <FormContainer onSubmit={fazerCadastro}>
           <TextField 
             value={nome}
             onChange={setNome}
@@ -150,7 +153,7 @@ function SignUpPage() {
             }}     
           />
 
-        <Button type="submit" onClick={fazerCadastro} color="secondary" variant="contained">Criar</Button>
+        <Button type="submit" color="secondary" variant="contained">Criar</Button>
         </FormContainer>
       </Container>
     </ThemeProvider>

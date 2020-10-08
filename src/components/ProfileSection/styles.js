@@ -99,13 +99,6 @@ export const Messagem = styled.div`
   margin-bottom: 8px;
 `;
 
-export const ContainerFooter = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  margin-top: 41vh;
-`;
-
 /* Container de historico de produtos */
 export const CardBox = styled.div`
   width: 90vw;
@@ -113,6 +106,8 @@ export const CardBox = styled.div`
   border: solid 1px #b8b8b8;
   height: 112px;
   margin-left: 1rem;
+  margin-bottom: 10px;
+  margin-top: 8px;
 `;
 
 export const ContainerInfos = styled.div`
@@ -139,4 +134,12 @@ export const ProductPrice = styled(ProductName)`
   color: black;
   margin-bottom: 15px;
   font-weight: bold;
+`;
+
+/* footer */
+export const ContainerFooter = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 10vh;
 `;

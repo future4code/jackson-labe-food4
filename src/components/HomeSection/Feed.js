@@ -11,6 +11,7 @@ import { AllContainer } from "./styles";
 import { theme } from "../../constants/themes";
 
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,6 +46,7 @@ const BaseFlex = styled.div`
 const Feed = () => {
   const getRestaurant = useRequestData([], "restaurants");
   const classes = useStyles();
+  const history = useHistory()
 
   const [inputRestaurant, setInputRestaurant] = useState("");
   const [inputCategories, setInputCategories] = useState("");
@@ -102,7 +104,11 @@ const Feed = () => {
         return <RestaurantsCards key={item.id} item={item} />;
       })
     
-    
+  useEffect(() => {
+    if(localStorage.getItem("token") === null) {
+      history.push("/")
+    }
+  }, [])  
 
   return (
     <ThemeProvider theme={theme}>

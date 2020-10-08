@@ -104,6 +104,10 @@ function CartPage() {
   };
 
   useEffect(() => {
+    if(localStorage.getItem("token") === null) {
+      history.push("/")
+    }
+
     getOrder();
     getAddress();
   }, []);
@@ -113,8 +117,6 @@ function CartPage() {
     setChecked(!checked);
   };
 
-  // history
-  const history = useHistory();
 
   return (
     <BaseFlex>

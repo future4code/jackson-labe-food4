@@ -47,6 +47,11 @@ function RestaurantPage() {
   };
 
   useEffect(() => {
+    
+    if(localStorage.getItem("token") === null) {
+      history.push("/")
+    }
+    
     getRestaurantDetail();
   }, []);
 

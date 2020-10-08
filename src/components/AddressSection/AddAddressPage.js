@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { TextField, Button, ThemeProvider } from "@material-ui/core";
 import useForm from "../../Hooks/useForm";
-import { addresUserCard } from "../../services/AddresUser";
+import { addresUserCard } from "../../services/PutAddres";
 
 import { theme } from "../../constants/themes";
 import styled from "styled-components";
@@ -36,8 +36,7 @@ const Title = styled.div`
 
 function AddAddressPage() {
   const history = useHistory;
-  /*nesse caso um um estado só recebe dois parametros como objeto dos campos de input ao inves 
-  de criar um para cada input*/
+
   const [form, handleInput] = useForm({
     street: "",
     number: "",
@@ -47,18 +46,13 @@ function AddAddressPage() {
     complement: "",
   });
 
-  /* Botão que envia os dados a api cria endereço */
   const createAddres = (event) => {
-    /* previne o comportamento padrao do form */
     event.preventDefault();
-    /* validação do form, já que tiramos a comum pelo prevent */
-    /* pegando o elemento form pelo dom */
+
     const element = document.getElementById("addres_form");
-    /* verificando a validação do elemento */
     const isValid = element.checkValidity();
-    /* chamando a validação */
     element.reportValidity();
-    /* só fará a requisição se passar na validação */
+
     if (isValid) {
       //requisição api,o body é a resposta do formulario
       addresUserCard(form, history);

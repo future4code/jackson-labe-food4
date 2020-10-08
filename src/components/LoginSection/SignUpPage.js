@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { TextField, ThemeProvider, InputAdornment, Button } from '@material-ui/core'
 import {theme} from "../../constants/themes";
 import LogoRappi4 from "./logo-future-eats-invert.png"
@@ -31,6 +31,13 @@ function SignUpPage() {
   const [ConfirmarSenha, setConfirmarSenha] = useInput("")
   const [showPassword, setShowPassword] = useState(false)
   const patt = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/
+
+  /* protege a pagina */
+  useEffect(() => {
+    if(localStorage.getItem("token") !== null) {
+      history.push("/feed")
+    }
+  }, [])
 
   /* mostra ou esconde o icone da senha */
   const handleClickShowPassword = () => {
@@ -70,7 +77,7 @@ function SignUpPage() {
     if(patt.test(CPF) && Senha === ConfirmarSenha){
       Cadastro()
     } else {
-      alert("CPF inválido")
+      alert("CPF ou senha inválidos")
       return
     }
   }

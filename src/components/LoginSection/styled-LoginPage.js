@@ -19,6 +19,7 @@ export const Text = styled(Typography) `
 
 export const Container = styled.div `
     box-sizing: border-box;
+    max-width: 360px;
     
 `
 export const LinkCadastro = styled(Link) `

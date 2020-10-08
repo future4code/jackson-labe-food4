@@ -126,7 +126,14 @@ function CartPage() {
       });
   };
 
+  // history
+  const history = useHistory();
+
   useEffect(() => {
+    if(localStorage.getItem("token") === null) {
+      history.push("/")
+    }
+
     getOrder();
     getAddress();
     getDetailProduct();
@@ -137,8 +144,6 @@ function CartPage() {
     setChecked(!checked);
   };
 
-  // history
-  const history = useHistory();
 
   return (
     <BaseFlex>

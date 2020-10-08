@@ -51,7 +51,7 @@ const Feed = () => {
   const [showMenu, setShowMenu] = useState(true);
   const [showSearch, setShowSearch] = useState(false);
   const [showRender, setShowRender] = useState(true);
-  const [restaurants, setRestaurants] = useState({});
+  const [restaurants, setRestaurants] = useState([]);
 
   const menu = () => {
     setShowMenu(false);
@@ -63,7 +63,8 @@ const Feed = () => {
   const offMenu = () => {
     setShowMenu(true);
     setShowSearch(false);
-    setInputRestaurant("");
+  
+    setShowRender(true)
   };
 
   const handleInput = (e) => {
@@ -88,8 +89,8 @@ const Feed = () => {
 
   getCategories();
 
-  const renderCards = () =>
-    getRestaurant
+  const renderCards = () => 
+      getRestaurant
       .filter((item) => {
         return item.category.indexOf(inputCategories) >= 0;
       })
@@ -98,7 +99,9 @@ const Feed = () => {
       })
       .map((item) => {
         return <RestaurantsCards key={item.id} item={item} />;
-      });
+      })
+    
+    
 
   return (
     <AllContainer>
@@ -112,6 +115,8 @@ const Feed = () => {
             label="Restaurantes"
             variant="outlined"
             onChange={handleInput}
+            onFocus={() => menu()}
+            onBlur={() => offMenu()}
             type="text"
             InputProps={{
               startAdornment: (

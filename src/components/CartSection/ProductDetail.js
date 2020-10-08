@@ -28,6 +28,7 @@ const ContainerInfos = styled.div`
   margin-left: 1rem;
   padding-top: 12px;
   position: relative;
+  width: 100vw;
 `;
 
 const ProductName = styled.p`
@@ -36,6 +37,7 @@ const ProductName = styled.p`
   color: #e86e5a;
   margin: 0 0 6px 0;
   font-size: 1rem;
+  width: 50vw;
 `;
 
 const ProductTitle = styled.p`
@@ -83,23 +85,21 @@ const ButtonDelete = styled.button`
   right: 0;
 `;
 
-function ProductDetail() {
+function ProductDetail(props) {
   return (
     <Container>
       {/* Container Produto */}
       <CardBox>
-        <BoxImg src="https://conteudo.imguol.com.br/c/entretenimento/71/2020/05/27/guia-do-hamburguer---sanduiche-1590607899872_v2_1920x1231.jpg" />
+        <BoxImg src={props.photo} />
 
         {/* Container Informações Gerais */}
         <ContainerInfos>
           {/* Infos */}
-          <CounterProduct>2</CounterProduct>
-          <ProductName>Stencil</ProductName>
-          <ProductTitle>
-            Pão, carne, queijo, cebola roxa, tomate, alface e molho.
-          </ProductTitle>
-          <ProductPrice>R$10,00</ProductPrice>
-          <ButtonDelete>Remover</ButtonDelete>
+          <CounterProduct>0</CounterProduct>
+          <ProductName>{props.name}</ProductName>
+          <ProductTitle>{props.description}</ProductTitle>
+          <ProductPrice>R${props.price}</ProductPrice>
+          <ButtonDelete>Adicionar</ButtonDelete>
         </ContainerInfos>
       </CardBox>
     </Container>

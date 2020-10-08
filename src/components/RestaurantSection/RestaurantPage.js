@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import axios from "axios";
+import ProductDetail from "./../CartSection/ProductDetail";
 
 import {
   ContainerTitle,
@@ -14,6 +15,7 @@ import {
   ContainerInfos,
   Principal,
   TextPrincipal,
+  ContainerProduct,
 } from "./styles";
 
 import { goToFeed } from "../../router/goToPages";
@@ -21,9 +23,8 @@ import { goToFeed } from "../../router/goToPages";
 function RestaurantPage() {
   const history = useHistory();
   const pathParams = useParams();
-  const [productsCat, setProductsCat] = useState([]);
+  const [products, setProducts] = useState([]);
   const [restaurant, setRestaurant] = useState("");
-  const [category, setCategory] = useState("");
 
   const getRestaurantDetail = () => {
     const request = axios.get(
@@ -37,9 +38,8 @@ function RestaurantPage() {
     );
     request
       .then((response) => {
-        setProductsCat(response.data.restaurant.products);
+        setProducts(response.data.restaurant.products);
         setRestaurant(response.data.restaurant);
-        console.log(response.data.restaurant);
       })
       .catch((err) => {
         console.log(err);
@@ -50,15 +50,13 @@ function RestaurantPage() {
     getRestaurantDetail();
   }, []);
 
-  const jaVisto = {};
+  const propertyRepeat = {};
 
-  const arrayFiltrado = productsCat.filter((item) => {
-    return jaVisto.hasOwnProperty(item.category)
+  const categoryFilter = products.filter((item) => {
+    return propertyRepeat.hasOwnProperty(item.category)
       ? false
-      : (jaVisto[item.category] = true);
+      : (propertyRepeat[item.category] = true);
   });
-
-  console.log(arrayFiltrado);
 
   return (
     <ContainerAll>
@@ -77,16 +75,35 @@ function RestaurantPage() {
       </ContainerInfos>
       <GrayTitle>{restaurant.address}</GrayTitle>
 
-      {/* Categorias */}
-      {arrayFiltrado.map((item) => {
+      {/* Filtro de categorias mapeados */}
+
+      {categoryFilter.map((item) => {
+        // Filtrando elemento por cada categoria
+        const productArray = products.filter((element) => {
+          return item.category === element.category;
+        });
+
+        // Retorno renderizado
         return (
-          <Principal>
-            <TextPrincipal>{item.category}</TextPrincipal>
-          </Principal>
+          <ContainerProduct>
+            <Principal>
+              <TextPrincipal>{item.category}</TextPrincipal>
+
+              {/* mapeando o filtro dos produtos por categoria */}
+            </Principal>
+            {productArray.map((product) => {
+              return (
+                <ProductDetail
+                  name={product.name}
+                  description={product.description}
+                  photo={product.photoUrl}
+                  price={product.price}
+                />
+              );
+            })}
+          </ContainerProduct>
         );
       })}
-
-      {/* <ProductDetail /> */}
     </ContainerAll>
   );
 }

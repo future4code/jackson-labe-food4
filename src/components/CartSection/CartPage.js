@@ -47,6 +47,8 @@ function CartPage() {
   const [address, setAddress] = useState(null);
   const [infos, setInfos] = useState({});
 
+  const history = useHistory()
+
   // Edição NavBar
   const useStyles = makeStyles({
     root: {

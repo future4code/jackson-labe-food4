@@ -4,7 +4,6 @@ import { TextField, Button, ThemeProvider } from "@material-ui/core";
 import useForm from "../../Hooks/useForm";
 import { editAddresProfile } from "../../services/PutEnderecoProfile";
 import React, {useEffect} from "react";
-import { useHistory } from 'react-router-dom'
 
 
 

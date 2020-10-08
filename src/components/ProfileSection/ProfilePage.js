@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Container,
   Title,
@@ -11,21 +11,40 @@ import {
   Historico,
   Messagem,
   HistoricoP,
-  ContainerFooter,
+  BaseFlex,
 } from "./styles";
 
+import { theme } from "../../constants/themes";
+import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import CreateOutlinedIcon from "@material-ui/icons/CreateOutlined";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import PersonOutlineOutlinedIcon from "@material-ui/icons/PersonOutlineOutlined";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
+import BottomNavigation from "@material-ui/core/BottomNavigation";
 import { useHistory } from "react-router-dom";
 
 import Link from "@material-ui/core/Link";
-import { goToAddAdress } from "../../router/goToPages";
+import {
+  goToAddAdress,
+  goToFeed,
+  goToCart,
+  goToProfile,
+} from "../../router/goToPages";
 
 function ProfilePage() {
   const history = useHistory();
+  const [value, setValue] = useState("profile");
+
+  const useStyles = makeStyles({
+    root: {
+      width: 350,
+      position: "fixed",
+      bottom: 0,
+    },
+  });
+
+  const classes = useStyles();
 
   return (
     <>
@@ -60,25 +79,46 @@ function ProfilePage() {
       </Historico>
       <Messagem>Você não realizou nenhum pedido</Messagem>
 
-      <ContainerFooter>
-        <Link href={"/feed"} color={"textPrimary"}>
-          <BottomNavigationAction
-            icon={<HomeOutlinedIcon fontSize="large" />}
-          />
-        </Link>
-
-        <Link href={"/cart"} color={"textPrimary"}>
-          <BottomNavigationAction
-            icon={<ShoppingCartOutlinedIcon fontSize="large" />}
-          />
-        </Link>
-
-        <Link href={"/profile"} color={"textPrimary"}>
-          <BottomNavigationAction
-            icon={<PersonOutlineOutlinedIcon fontSize="large" />}
-          />
-        </Link>
-      </ContainerFooter>
+      <BaseFlex>
+        <ThemeProvider theme={theme}>
+          <BottomNavigation
+            value={value}
+            onChange={(event, newValue) => {
+              setValue(newValue);
+            }}
+            showLabels
+            className={classes.root}
+          >
+            <BottomNavigationAction
+              value="home"
+              icon={
+                <HomeOutlinedIcon
+                  fontSize="large"
+                  onClick={() => goToFeed(history)}
+                />
+              }
+            />
+            <BottomNavigationAction
+              value="cart"
+              icon={
+                <ShoppingCartOutlinedIcon
+                  fontSize="large"
+                  onClick={() => goToCart(history)}
+                />
+              }
+            />
+            <BottomNavigationAction
+              value="profile"
+              icon={
+                <PersonOutlineOutlinedIcon
+                  fontSize="large"
+                  onClick={() => goToProfile(history)}
+                />
+              }
+            />
+          </BottomNavigation>
+        </ThemeProvider>
+      </BaseFlex>
     </>
   );
 }

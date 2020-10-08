@@ -35,7 +35,7 @@ const Title = styled.div`
 `;
 
 function EditProfile() {
-  const history = useHistory;
+  const history = useHistory();
 
   const [form, handleInput] = useForm({
     name: "",

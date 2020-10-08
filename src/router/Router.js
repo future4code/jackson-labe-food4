@@ -47,11 +47,14 @@ function Router() {
           <ProfilePage />
         </Route>
 
-
-        <Route exact path="/EditProfile">
+        <Route exact path="/editProfile">
           <EditProfile />
         </Route>
-    
+
+        <Route exact path="/editaddress">
+          <EditAddress />
+        </Route>
+
         <Route exact path="/restaurant/:id">
           <RestaurantPage />
         </Route>

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import CreateIcon from "@material-ui/icons/Create";
 
 export const Container = styled.div`
   display: flex;
@@ -97,11 +96,47 @@ export const Messagem = styled.div`
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   text-align: center;
   margin-top: 28px;
+  margin-bottom: 8px;
 `;
 
 export const ContainerFooter = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
   margin-top: 41vh;
+`;
+
+/* Container de historico de produtos */
+export const CardBox = styled.div`
+  width: 90vw;
+  border-radius: 8px;
+  border: solid 1px #b8b8b8;
+  height: 112px;
+  margin-left: 1rem;
+`;
+
+export const ContainerInfos = styled.div`
+  margin-left: 1rem;
+`;
+
+export const ProductName = styled.p`
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: #e86e5a;
+  margin: 10px 0 6px 0;
+  font-size: 1rem;
+`;
+
+export const ProductTitle = styled.p`
+  color: #000;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+
+  font-size: 0.875rem;
+`;
+
+export const ProductPrice = styled(ProductName)`
+  color: black;
+  margin-bottom: 15px;
+  font-weight: bold;
 `;

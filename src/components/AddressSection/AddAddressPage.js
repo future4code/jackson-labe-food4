@@ -35,7 +35,7 @@ const Title = styled.div`
 `;
 
 function AddAddressPage() {
-  const history = useHistory;
+  const history = useHistory();
 
   const [form, handleInput] = useForm({
     street: "",
@@ -66,9 +66,7 @@ function AddAddressPage() {
         <Title>Meu Endereço</Title>
         <form id={"addres_form"}>
           <TextField
-            /* Valor vindo do input = form estado*/
             value={form.street}
-            /* vem da função handle, onde ele vai alterar somente o nome dos campos */
             name={"street"}
             onChange={handleInput}
             label="Logradouro"
@@ -81,9 +79,7 @@ function AddAddressPage() {
             autoFocus
           />
           <TextField
-            /* Valor vindo do input = form estado*/
             value={form.number}
-            /* vem da função handle, onde ele vai alterar somente o nome dos campos */
             name={"number"}
             onChange={handleInput}
             label="Número"
@@ -96,7 +92,6 @@ function AddAddressPage() {
           />
 
           <TextField
-            /* Valor vindo do input = form estado*/
             value={form.neighbourhood}
             name={"neighbourhood"}
             onChange={handleInput}
@@ -110,7 +105,6 @@ function AddAddressPage() {
           />
 
           <TextField
-            /* Valor vindo do input = form estado*/
             value={form.city}
             name={"city"}
             onChange={handleInput}
@@ -124,7 +118,6 @@ function AddAddressPage() {
           />
 
           <TextField
-            /* Valor vindo do input = form estado*/
             value={form.state}
             name={"state"}
             onChange={handleInput}
@@ -137,7 +130,6 @@ function AddAddressPage() {
             required
           />
           <TextField
-            /* Valor vindo do input = form estado*/
             value={form.complement}
             name={"complement"}
             onChange={handleInput}

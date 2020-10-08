@@ -12,8 +12,14 @@ import {
   Messagem,
   HistoricoP,
   ContainerFooter,
+  CardBox,
+  ContainerInfos,
+  ProductName,
+  ProductTitle,
+  ProductPrice,
 } from "./styles";
 
+//Material ui
 import CreateOutlinedIcon from "@material-ui/icons/CreateOutlined";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
@@ -22,7 +28,6 @@ import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import { useHistory } from "react-router-dom";
 
 import Link from "@material-ui/core/Link";
-import { goToAddAdress } from "../../router/goToPages";
 
 function ProfilePage() {
   const history = useHistory();
@@ -33,7 +38,7 @@ function ProfilePage() {
         <Title>Meu Perfil</Title>
       </Container>
       <DataProfile>
-        <Link href={"/addaddress"} color={"textPrimary"}>
+        <Link href={"/editProfile"} color={"textPrimary"}>
           <ContainerIcon>
             <span>Bruna Oliveira</span>
             <CreateOutlinedIcon />
@@ -45,7 +50,7 @@ function ProfilePage() {
       </DataProfile>
 
       <ContainerAddress>
-        <Link href={"/addaddress"} color={"textPrimary"}>
+        <Link href={"/editaddress"} color={"textPrimary"}>
           <TitleAddress>Endereço cadastrado</TitleAddress>
 
           <ContainerIconAddres>
@@ -59,6 +64,14 @@ function ProfilePage() {
         <HistoricoP>Histórico de pedidos</HistoricoP>
       </Historico>
       <Messagem>Você não realizou nenhum pedido</Messagem>
+
+      <CardBox>
+        <ContainerInfos>
+          <ProductName>Burger Vila Madalena</ProductName>
+          <ProductTitle>23 de outubro 2019</ProductTitle>
+          <ProductPrice>Subtotal R$ 89,00</ProductPrice>
+        </ContainerInfos>
+      </CardBox>
 
       <ContainerFooter>
         <Link href={"/feed"} color={"textPrimary"}>

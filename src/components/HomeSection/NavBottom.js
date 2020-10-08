@@ -11,7 +11,7 @@ import { goToCart, goToFeed, goToProfile } from "../../router/goToPages";
 import { useHistory } from "react-router-dom";
 
 const NavBottom = () => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState("home");
   const history = useHistory();
   const useStyles = makeStyles({
     root: {
@@ -35,6 +35,7 @@ const NavBottom = () => {
         className={classes.root}
       >
         <BottomNavigationAction
+          value="home"
           icon={
             <HomeOutlinedIcon
               fontSize="large"

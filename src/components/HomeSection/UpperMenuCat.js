@@ -1,63 +1,48 @@
-import React from 'react'
-import PropTypes from 'prop-types'; 
+import React from "react";
+import PropTypes from "prop-types";
 
+import {
+  ExtDivCarousel,
+  DivItem,
+  InsideDiv,
+  InsideDivScroll,
+  ParagrafCat,
+  ContainerCat,
+} from "./styles";
 
-import styled from 'styled-components'
+const UpperMenuCat = ({ categories, setInputCategories }) => {
+  // renderizar menu
+  const renderCategories = () =>
+    categories.map((item) => {
+      return (
+        <ParagrafCat
+          key={item}
+          onClick={() => {
+            setInputCategories(item);
+          }}
+        >
+          {item}
+        </ParagrafCat>
+      );
+    });
 
-const ContainerCat = styled.div`
-display: flex;
-`
-const ParagrafCat = styled.p`
-margin: 3px;
-padding: 3px;
-:hover {
-		color: #ed1212;
-		cursor: pointer;
-	}
-`
+  return (
+    // menu renderizado em carrosel
+    <ExtDivCarousel>
+      <DivItem className="item">
+        <InsideDiv>
+          {" "}
+          <ContainerCat>{renderCategories()}</ContainerCat>
+        </InsideDiv>
+        <InsideDivScroll />
+      </DivItem>
+    </ExtDivCarousel>
+  );
+};
 
-
-
-const UpperMenuCat= ({categories, setInputCategories}) => {
-
-    
-
-
-      
-    
-    const renderCategories = () => (
-        categories.map((item) => {
-            return (
-            <ParagrafCat key={item} onClick={() =>{ setInputCategories(item) }} >{item}</ParagrafCat>
-          )
-        })
-    )
-
-    
-   return (
-        <ContainerCat>
-            {renderCategories()}         
-        </ContainerCat>
-    )
-}
-
-export default UpperMenuCat
-
+export default UpperMenuCat;
 
 UpperMenuCat.propTypes = {
-    categories: PropTypes.array,
-    setInputCategories: PropTypes.func
-
-
-   
-   }
-
-
-
-  
-
-
-
-
-
-
+  categories: PropTypes.array,
+  setInputCategories: PropTypes.func,
+};

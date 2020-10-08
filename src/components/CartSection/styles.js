@@ -8,6 +8,11 @@ export const BaseFlex = styled.div`
   position: relative;
 `;
 
+export const BaseFlexNav = styled(BaseFlex)`
+  align-items: center;
+  position: relative;
+`;
+
 export const BoxInfo = styled.div`
   width: 100vw;
   background-color: #eeeeee;

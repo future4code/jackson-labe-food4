@@ -35,7 +35,10 @@ import {
   LabelCheckBox,
   Button,
   EmptyCart,
+  BaseFlexNav,
 } from "./styles";
+import { goToCart, goToFeed, goToProfile } from "../../router/goToPages";
+import { useHistory } from "react-router-dom";
 
 function CartPage() {
   // Estado
@@ -49,10 +52,8 @@ function CartPage() {
   const useStyles = makeStyles({
     root: {
       width: 350,
-      position: "absolute",
+      position: "fixed",
       bottom: 0,
-      marginLeft: 20,
-      marginTop: 20,
     },
   });
 
@@ -136,6 +137,9 @@ function CartPage() {
     setChecked(!checked);
   };
 
+  // history
+  const history = useHistory();
+
   return (
     <BaseFlex>
       {/* Intro */}
@@ -174,7 +178,11 @@ function CartPage() {
 
       {/* Pagamento */}
       <TaxBox>
-        <FreteText>Frete R${infos.shipping}</FreteText>
+        {order === null ? (
+          <FreteText>Frete R$0,00</FreteText>
+        ) : (
+          <FreteText>Frete R${infos.shipping}</FreteText>
+        )}
       </TaxBox>
       <SubTotal>
         <SubTotalText>SUBTOTAL</SubTotalText>
@@ -201,26 +209,43 @@ function CartPage() {
       <Button>Confirmar</Button>
 
       {/* Botton Nav */}
-      <ThemeProvider theme={theme}>
-        <BottomNavigation
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-          showLabels
-          className={classes.root}
-        >
-          <BottomNavigationAction
-            icon={<HomeOutlinedIcon fontSize="large" />}
-          />
-          <BottomNavigationAction
-            icon={<ShoppingCartOutlinedIcon fontSize="large" />}
-          />
-          <BottomNavigationAction
-            icon={<PersonOutlineOutlinedIcon fontSize="large" />}
-          />
-        </BottomNavigation>
-      </ThemeProvider>
+      <BaseFlexNav>
+        <ThemeProvider theme={theme}>
+          <BottomNavigation
+            value={value}
+            onChange={(event, newValue) => {
+              setValue(newValue);
+            }}
+            showLabels
+            className={classes.root}
+          >
+            <BottomNavigationAction
+              icon={
+                <HomeOutlinedIcon
+                  fontSize="large"
+                  onClick={() => goToFeed(history)}
+                />
+              }
+            />
+            <BottomNavigationAction
+              icon={
+                <ShoppingCartOutlinedIcon
+                  fontSize="large"
+                  onClick={() => goToCart(history)}
+                />
+              }
+            />
+            <BottomNavigationAction
+              icon={
+                <PersonOutlineOutlinedIcon
+                  fontSize="large"
+                  onClick={() => goToProfile(history)}
+                />
+              }
+            />
+          </BottomNavigation>
+        </ThemeProvider>
+      </BaseFlexNav>
     </BaseFlex>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   InputAdornment,
@@ -29,6 +29,12 @@ function LoginPage() {
   const [Email, setEmail] = useState("");
   const [Senha, setSenha] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    if(localStorage.getItem("token") !== null) {
+      history.push("/feed")
+    }
+  }, [])
 
   const onChangeEmail = (e) => {
     setEmail(e.target.value);

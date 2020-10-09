@@ -40,7 +40,7 @@ function Router(props) {
         </Route>
 
         <Route exact path="/cart">
-          <CartPage />
+          <CartPage carrinho={props.carrinho}/>
         </Route>
 
         <Route exact path="/addaddress">

@@ -37,7 +37,7 @@ import {
 import { goToCart, goToFeed, goToProfile } from "../../router/goToPages";
 import { useHistory } from "react-router-dom";
 
-function CartPage() {
+function CartPage(props) {
   // Estado
   const [value, setValue] = useState("cart");
   const [checked, setChecked] = useState(false);
@@ -45,7 +45,6 @@ function CartPage() {
   const [address, setAddress] = useState(null);
   const [infos, setInfos] = useState({});
 
-  const testTry = true
 
 
 
@@ -64,7 +63,7 @@ function CartPage() {
 
   // Pegar endereço do cliente
 
-  const getAddress = () => {
+  const getAddress = (props) => {
     const request = axios.get(
       "https://us-central1-missao-newton.cloudfunctions.net/rappi4A/profile/address",
       {
@@ -148,18 +147,17 @@ function CartPage() {
       {/* Infos do Restaurante */}
 
       {/* Produtos */}
-      {!testTry && <ProductDetail
-      address={address.street}
-      />}
-
-      {order === null && <EmptyCart>Seu carrinho está vazio!</EmptyCart>}
-      {order !== null && (
-        <div>
-          <RestaurantName>{order.restaurantName}</RestaurantName>
-          <GrayTitle>{infos.address}</GrayTitle>
-          <GrayTitle>{infos.deliveryTime}min</GrayTitle>
-        </div>
-      )}
+     
+      {props.carrinho === null && <EmptyCart>Seu carrinho está vazio!</EmptyCart>}
+      {props.carrinho !== null && props.carrinho.map((item) => {
+        return (
+          <div>
+            <p>{item.name}</p>
+            <p>{item.image}</p>
+            <p>{item.description}</p>
+          </div>
+        )
+      })}
 
       {/* Pagamento */}
       <TaxBox>{order === null && <FreteText>Frete R$0,00</FreteText>}</TaxBox>

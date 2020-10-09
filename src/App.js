@@ -5,6 +5,8 @@ import Router from "./router/Router";
 
 function App() {
 
+  // onClick carrinho passado por props até product details, para renderizá-los no cartPage.
+
   const [carrinho, setCarrinho] = useState([]);
 
   let soma = 0;
@@ -41,6 +43,8 @@ function App() {
     setCarrinho(newCart);
     resetState()
   };
+
+  console.log(carrinho)
 
   return (
     <div>

@@ -63,6 +63,7 @@ export const FreteText = styled.p`
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 1rem;
   font-weight: 600;
+  text-align: end;
 `;
 
 export const TotalText = styled(FreteText)`

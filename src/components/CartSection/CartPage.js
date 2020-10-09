@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import axios from "axios";
 import { theme } from "../../constants/themes";
 import { makeStyles } from "@material-ui/core/styles";
-import useRequestData from "../../services/useRequestData";
-
+import ProductDetail from "../../components/ProductDetail/ProductDetail"
 // Material
 import { ThemeProvider } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
@@ -46,6 +44,10 @@ function CartPage() {
   const [order, setOrder] = useState({});
   const [address, setAddress] = useState(null);
   const [infos, setInfos] = useState({});
+
+  const testTry = true
+
+
 
   const history = useHistory()
 
@@ -146,6 +148,10 @@ function CartPage() {
       {/* Infos do Restaurante */}
 
       {/* Produtos */}
+      {!testTry && <ProductDetail
+      address={address.street}
+      />}
+
       {order === null && <EmptyCart>Seu carrinho está vazio!</EmptyCart>}
       {order !== null && (
         <div>

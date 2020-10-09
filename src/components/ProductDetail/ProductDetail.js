@@ -62,7 +62,6 @@ const useStyles = makeStyles((theme) => ({
 function ProductDetail(props) {
   // states
   const [open, setOpen] = useState(false);
-  const [carrinho, setCarrinho] = useState([]);
   const [counter, setCounter] = useState(0);
 
   // ====== MODAL ======
@@ -107,51 +106,17 @@ function ProductDetail(props) {
     onChange(name, value);
   };
 
-  // ====== ADICIONAR AO CARRINHO ======
-
-  let soma = 0;
-
-  const onClickCarrinho = (id) => {
-    let newCart = [...carrinho];
-
-    // Se tiver um produto encontrado no array e esse id for igual ao do produto
-    const addProduct = props.products.map((produto) => {
-      if (id === produto.id) {
-        newCart.push({
-          id: produto.id,
-          name: produto.name,
-          price: produto.price,
-          description: produto.description,
-          quantidade: Number(form.quantidade),
-          image: produto.photoUrl
-        });
-      }
-      return false;
-    });
-
-    if (addProduct === undefined) {
-      console.error("Produto inválido");
-      return;
-    }
-
-
-    newCart.filter((item) => {
-      return setCounter(Number(soma += item.quantidade))
-    })
-
-    setCarrinho(newCart);
-    resetState()
-  };
+ 
 
   // Remover item do carrinho
   const removeItem = (id) => {
-    const cartAtt = [...carrinho]
+    const cartAtt = [...props.carrinho]
 
     const removeProduct = cartAtt.filter((produto) => {
       return id !== produto.id
     })
 
-    setCarrinho(removeProduct)
+    props.setCarrinho(removeProduct)
     setCounter(0)
   }
 
@@ -178,7 +143,7 @@ function ProductDetail(props) {
             required
           >
             {/* Options */}
-            <option value={0} />
+            <option value=""></option>
             <option value={1}>1</option>
             <option value={2}>2</option>
             <option value={3}>3</option>
@@ -194,7 +159,7 @@ function ProductDetail(props) {
             type="submit"
             color="primary"
             className={classes.margin}
-            onClick={() => onClickCarrinho(props.id)}
+            onClick={() => props.onClickCarrinho(props.id, props.products, resetState, form.quantidade, setCounter)}
           >
             adicionar ao carrinho
           </Button>
@@ -213,7 +178,7 @@ function ProductDetail(props) {
         {/* Container Informações Gerais */}
         <ContainerInfos>
           {/* Infos */}
-          <CounterProduct>{counter}</CounterProduct>
+          {counter > 0 &&<CounterProduct>{counter}</CounterProduct>}
           <ProductName>{props.name}</ProductName>
           <ProductTitle>{props.description}</ProductTitle>
           <ProductPrice>R${props.price}</ProductPrice>

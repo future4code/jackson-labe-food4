@@ -1,4 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
+import axios from 'axios'
+import { useHistory, useParams } from "react-router-dom";
+
 
 // Router
 import { BrowserRouter, Switch, Route } from "react-router-dom";
@@ -15,7 +18,8 @@ import EditAddress from "../components/ProfileSection/EditAddress";
 import RestaurantPage from "../components/RestaurantSection/RestaurantPage";
 import SplashScreen from "../components/SplashScreen/SplashScreen";
 
-function Router() {
+function Router(props) {
+  
   return (
     <BrowserRouter>
       <Switch>
@@ -56,7 +60,11 @@ function Router() {
         </Route>
 
         <Route exact path="/restaurant/:id">
-          <RestaurantPage />
+          <RestaurantPage 
+          carrinho={props.carrinho}
+          setCarrinho={props.setCarrinho}
+          onClickCarrinho={props.onClickCarrinho}
+          />
         </Route>
       </Switch>
     </BrowserRouter>

@@ -20,7 +20,7 @@ import {
 
 import { goToFeed } from "../../router/goToPages";
 
-function RestaurantPage() {
+function RestaurantPage(props) {
   const history = useHistory();
   const pathParams = useParams();
   const [products, setProducts] = useState([]);
@@ -99,6 +99,9 @@ function RestaurantPage() {
             {productArray.map((product) => {
               return (
                 <ProductDetail
+                carrinho={props.carrinho}
+                setCarrinho={props.setCarrinho}
+                onClickCarrinho={props.onClickCarrinho}
                   products={products}
                   id={product.id}
                   name={product.name}

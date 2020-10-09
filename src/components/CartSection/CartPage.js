@@ -117,27 +117,33 @@ function CartPage(props) {
     getAddress();
   }, []);
 
-  // checbox
-  const checkState = () => {
-    setChecked(!checked);
-  };
 
-  const productsArray = () =>{
-    props.carrinho.forEach((item) => {
+
+  // ==== Bloco pra gerar a requisição de pedido ====
+
+  // Desestruturando o carrinho
+  const cart = [...props.carrinho]
+
+
+  // Criando um array pra passar pro body
+  const productsArray =  
+  cart.map((item) => {
       return {
         id: item.id,
         quantity: item.quantidade
       }
     })
-  }
+  
 
+
+    // Requisição de pedido
   const placeOrder = () => {
     const body = {
       products: productsArray,
       paymentMethod: form.pagamento
     }
 
-    const request = axios.post(`"https://us-central1-missao-newton.cloudfunctions.net/rappi4A/restaurants/${props.restaurant.id}/order`, body, {
+    const request = axios.post(`https://us-central1-missao-newton.cloudfunctions.net/rappi4A/restaurants/${props.restaurant.id}/order`, body, {
       headers: {
         auth: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Im9hNnlRTm56RXN6YUlYbndMSEhOIiwibmFtZSI6IkRhbmllbCIsImVtYWlsIjoiZGFuQGZ1dHVyZTQuY29tIiwiY3BmIjoiMTMxLjMxMS4xMTEtMTEiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiUi4geHh4eCBCcmF6LCAxNzM3IC0gVmlsYSBOLiBDb25jZWnDp8OjbyIsImlhdCI6MTYwMTkyNTk5NX0.WSyb9hsFmfaTSu_icgzWzeUudwsSmbM0Bol9Ll7keUs"
       }
@@ -150,7 +156,7 @@ function CartPage(props) {
     })
   }
 
-  // remove item do carrinho
+  // Remove item do carrinho
   const removeItemOnCart = (id) => {
     const cart = [...props.carrinho]
 
@@ -162,7 +168,7 @@ function CartPage(props) {
 
   }
 
-  console.log(form.pagamento)
+
   return (
     <BaseFlex>
       {/* Intro */}

@@ -15,7 +15,6 @@ import PersonOutlineOutlinedIcon from "@material-ui/icons/PersonOutlineOutlined"
 import LinearProgress from "@material-ui/core/LinearProgress";
 
 // Component
-import ProductDetail from "./ProductDetail";
 
 // Styled
 import {
@@ -47,6 +46,8 @@ function CartPage() {
   const [order, setOrder] = useState({});
   const [address, setAddress] = useState(null);
   const [infos, setInfos] = useState({});
+
+  const history = useHistory()
 
   // Edição NavBar
   const useStyles = makeStyles({
@@ -104,32 +105,13 @@ function CartPage() {
       });
   };
 
-  // Infos do Restaurante
-  const getDetailProduct = () => {
-    const request = axios.get(
-      "https://us-central1-missao-newton.cloudfunctions.net/rappi4A/restaurants/1",
-      {
-        headers: {
-          auth:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Im9hNnlRTm56RXN6YUlYbndMSEhOIiwibmFtZSI6IkRhbmllbCIsImVtYWlsIjoiZGFuQGZ1dHVyZTQuY29tIiwiY3BmIjoiMTMxLjMxMS4xMTEtMTEiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiUi4geHh4eCBCcmF6LCAxNzM3IC0gVmlsYSBOLiBDb25jZWnDp8OjbyIsImlhdCI6MTYwMTkyNTk5NX0.WSyb9hsFmfaTSu_icgzWzeUudwsSmbM0Bol9Ll7keUs",
-        },
-      }
-    );
-
-    request
-      .then((response) => {
-        console.log(response.data.restaurant);
-        setInfos(response.data.restaurant);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   useEffect(() => {
+    if(localStorage.getItem("token") === null) {
+      history.push("/")
+    }
+
     getOrder();
     getAddress();
-    getDetailProduct();
   }, []);
 
   // checbox
@@ -137,8 +119,6 @@ function CartPage() {
     setChecked(!checked);
   };
 
-  // history
-  const history = useHistory();
 
   return (
     <BaseFlex>
@@ -176,13 +156,7 @@ function CartPage() {
       )}
 
       {/* Pagamento */}
-      <TaxBox>
-        {order === null ? (
-          <FreteText>Frete R$0,00</FreteText>
-        ) : (
-          <FreteText>Frete R${infos.shipping}</FreteText>
-        )}
-      </TaxBox>
+      <TaxBox>{order === null && <FreteText>Frete R$0,00</FreteText>}</TaxBox>
       <SubTotal>
         <SubTotalText>SUBTOTAL</SubTotalText>
         {order === null ? (

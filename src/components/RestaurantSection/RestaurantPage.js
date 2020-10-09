@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import axios from "axios";
-import ProductDetail from "./../CartSection/ProductDetail";
+import ProductDetail from "../ProductDetail/ProductDetail";
 
 import {
   ContainerTitle,
@@ -47,6 +47,11 @@ function RestaurantPage() {
   };
 
   useEffect(() => {
+    
+    if(localStorage.getItem("token") === null) {
+      history.push("/")
+    }
+    
     getRestaurantDetail();
   }, []);
 
@@ -94,6 +99,8 @@ function RestaurantPage() {
             {productArray.map((product) => {
               return (
                 <ProductDetail
+                  products={products}
+                  id={product.id}
                   name={product.name}
                   description={product.description}
                   photo={product.photoUrl}

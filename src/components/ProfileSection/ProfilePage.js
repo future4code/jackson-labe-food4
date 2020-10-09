@@ -18,7 +18,7 @@ import {
   ProductName,
   ProductTitle,
   ProductPrice,
-    BaseFlex,
+  BaseFlex,
 } from "./styles";
 
 //Material ui
@@ -43,14 +43,13 @@ import {
   goToProfile,
 } from "../../router/goToPages";
 
-
 function ProfilePage() {
   const [orderHistory, setOrderHistory] = useState(null);
   const [profile, setProfile] = useState(null);
-    const history = useHistory();
+  const history = useHistory();
   const [value, setValue] = useState("profile");
-  
-    const useStyles = makeStyles({
+
+  const useStyles = makeStyles({
     root: {
       width: 350,
       position: "fixed",
@@ -61,8 +60,8 @@ function ProfilePage() {
   const classes = useStyles();
 
   useEffect(() => {
-    if(localStorage.getItem("token") === null) {
-      history.push("/")
+    if (localStorage.getItem("token") === null) {
+      history.push("/");
     }
     getHistory();
     getProfile();
@@ -78,12 +77,9 @@ function ProfilePage() {
     });
     request
       .then((response) => {
-        console.log(response.data, "dados de profile");
         setProfile(response.data.user);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
 
   /* historico de pedidos */
@@ -96,15 +92,10 @@ function ProfilePage() {
     });
     request
       .then((response) => {
-        console.log(response.data, "dados de pedidos");
         setOrderHistory(response.data.orders);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
-  console.log(orderHistory);
-
 
   return (
     <>
@@ -149,7 +140,6 @@ function ProfilePage() {
         <HistoricoP>Histórico de pedidos</HistoricoP>
       </Historico>
 
-
       {orderHistory === null && (
         <p>
           <LinearProgress color="secondary" />
@@ -172,7 +162,6 @@ function ProfilePage() {
             </CardBox>
           );
         })}
-
 
       <BaseFlex>
         <ThemeProvider theme={theme}>

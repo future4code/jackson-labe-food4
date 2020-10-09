@@ -1,38 +1,13 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { TextField, Button, ThemeProvider } from "@material-ui/core";
+
 import useForm from "../../Hooks/useForm";
 import { addresUserCard } from "../../services/PutAddres";
 
+import { AddressContainer, Title } from "./styles";
+
+import { TextField, Button, ThemeProvider } from "@material-ui/core";
 import { theme } from "../../constants/themes";
-import styled from "styled-components";
-
-const AddressContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100vw;
-
-  form {
-    display: flex;
-    flex-direction: column;
-    width: 80vw;
-    max-width: 450px;
-  }
-
-  Button {
-    margin-top: 16px;
-  }
-`;
-
-const Title = styled.div`
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 16px;
-  letter-spacing: -0.39px;
-  text-align: center;
-  margin-top: 7vw;
-`;
 
 function AddAddressPage() {
   const history = useHistory();
@@ -54,17 +29,15 @@ function AddAddressPage() {
     element.reportValidity();
 
     if (isValid) {
-      //requisição api,o body é a resposta do formulario
       addresUserCard(form, history);
     }
-    console.log(form, "form do adrres aqui");
   };
 
   useEffect(() => {
-    if(localStorage.getItem("token") === null) {
-      history.push("/")
+    if (localStorage.getItem("token") === null) {
+      history.push("/");
     }
-  }, [])  
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -108,6 +81,9 @@ function AddAddressPage() {
             margin={"normal"}
             fullWidth
             required
+            inputProps={{
+              "data-testid": "bairro",
+            }}
           />
 
           <TextField

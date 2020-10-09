@@ -17,6 +17,5 @@ export const addresUserCard = (body, history) => {
     })
     .catch((error) => {
       alert("Endereço não adicionado, por favor tente novamente");
-      console.log(error);
     });
 };

@@ -11,11 +11,9 @@ export const editUser = (body, history) => {
       },
     })
     .then((response) => {
-      console.log(response, "response editeprofile");
       goToProfile(history);
     })
     .catch((error) => {
       alert("Perfil não atualizado, por favor tente novamente");
-      console.log(error);
     });
 };

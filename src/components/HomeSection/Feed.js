@@ -54,13 +54,14 @@ const Feed = () => {
   const [showMenu, setShowMenu] = useState(true);
   const [showSearch, setShowSearch] = useState(false);
   const [showRender, setShowRender] = useState(true);
-  const [restaurants, setRestaurants] = useState([]);
+  const [restaurants, setRestaurants] = useState();
 
   const menu = () => {
     setShowMenu(false);
     setShowSearch(true);
     setShowRender(false);
     setInputRestaurant("");
+  
   };
 
   const offMenu = () => {
@@ -86,22 +87,46 @@ const Feed = () => {
       if (hasCat === false) {
         let categoriesArray = [...categories, item.category];
         setCategories(categoriesArray);
+        setRestaurants(categoriesArray)
       }
     });
   };
 
   getCategories();
 
-  const renderCards = () => 
-      getRestaurant
+  const filterRestaurant = (item) => {
+    const restaurantFilter = getRestaurant
       .filter((item) => {
         return item.category.indexOf(inputCategories) >= 0;
       })
       .filter((item) => {
         return item.name.toLowerCase().indexOf(inputRestaurant) >= 0;
       })
+      setRestaurants(restaurantFilter)
+  }
+  useEffect(() => {
+    filterRestaurant()
+    console.log(restaurants)
+  },[inputRestaurant])
+
+  const renderCards = () => {
+      const restaurantFilter = getRestaurant
+      .filter((item) => {
+        return item.category.indexOf(inputCategories) >= 0;
+      })
+      .filter((item) => {
+        return item.name.toLowerCase().indexOf(inputRestaurant) >= 0;
+      })
+      
+      return(
+      restaurantFilter
       .map((item) => {
         return <RestaurantsCards key={item.id} item={item} />;
+
+      }))
+    
+  }
+
       })
     
   useEffect(() => {
@@ -109,6 +134,7 @@ const Feed = () => {
       history.push("/")
     }
   }, [])  
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -140,7 +166,12 @@ const Feed = () => {
           />
         </form>
 
-        {showSearch && <p>Busque por nome do Restaurante</p>}
+        
+        {showSearch && <>
+          {restaurants.length ? <></> : <p>Restaurante não encontrado :/</p>}
+          <p>Busque por nome do Restaurante</p>
+          </>
+        }
         {showMenu && (
           <UpperMenuCat
             setInputCategories={setInputCategories}

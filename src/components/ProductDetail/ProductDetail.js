@@ -178,7 +178,7 @@ function ProductDetail(props) {
         {/* Container Informações Gerais */}
         <ContainerInfos>
           {/* Infos */}
-          {counter > 0 &&<CounterProduct>{counter}</CounterProduct>}
+          {counter > 0 && <CounterProduct>{counter}</CounterProduct>}
           <ProductName>{props.name}</ProductName>
           <ProductTitle>{props.description}</ProductTitle>
           <ProductPrice>R${props.price}</ProductPrice>

@@ -37,6 +37,7 @@ function App() {
 
     // filtrando os itens do carrinho por quantidade e setando o contador.
     newCart.filter((item) => {
+      if(id === item.id)
       return setCounter(Number(soma += item.quantidade))
     })
 

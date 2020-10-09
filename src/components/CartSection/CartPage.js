@@ -33,6 +33,16 @@ import {
   Button,
   EmptyCart,
   BaseFlexNav,
+  ContainerProductCard,
+  CardBox,
+  BoxImg,
+  ContainerInfos,
+  ProductName,
+  ProductTitle,
+  ProductPrice,
+  CounterProduct,
+  ButtonProduct,
+  ButtonDelete
 } from "./styles";
 import { goToCart, goToFeed, goToProfile } from "../../router/goToPages";
 import { useHistory } from "react-router-dom";
@@ -120,6 +130,8 @@ function CartPage(props) {
     setChecked(!checked);
   };
 
+  console.log(props.carrinho)
+
 
   return (
     <BaseFlex>
@@ -148,26 +160,39 @@ function CartPage(props) {
 
       {/* Produtos */}
      
-      {props.carrinho === null && <EmptyCart>Seu carrinho está vazio!</EmptyCart>}
-      {props.carrinho !== null && props.carrinho.map((item) => {
+      {props.carrinho.length === 0 && <EmptyCart>Seu carrinho está vazio!</EmptyCart>}
+      {props.carrinho.length > 0 && props.carrinho.map((item) => {
         return (
-          <div>
-            <p>{item.name}</p>
-            <p>{item.image}</p>
-            <p>{item.description}</p>
-          </div>
+          <ContainerProductCard>
+      {/* Container Produto */}
+      <CardBox>
+        <BoxImg src={item.image} />
+
+        {/* Container Informações Gerais */}
+        <ContainerInfos>
+          {/* Infos */}
+          
+          <CounterProduct>{item.quantidade}</CounterProduct>
+          <ProductName>{item.name}</ProductName>
+          <ProductTitle>{item.description}</ProductTitle>
+          <ProductPrice>R${item.price}</ProductPrice>
+          <ButtonDelete>Remover</ButtonDelete>
+          
+        </ContainerInfos>
+      </CardBox>
+    </ContainerProductCard>
         )
       })}
 
       {/* Pagamento */}
-      <TaxBox>{order === null && <FreteText>Frete R$0,00</FreteText>}</TaxBox>
+      <TaxBox>{props.carrinho === null && <FreteText>Frete R$0,00</FreteText>}</TaxBox>
       <SubTotal>
         <SubTotalText>SUBTOTAL</SubTotalText>
-        {order === null ? (
+        {/* {props.carrinho === null ? (
           <TotalText>R$0,00</TotalText>
         ) : (
           <TotalText>R${order.totalPrice}</TotalText>
-        )}
+        )} */}
       </SubTotal>
       <Payment>
         <SubTotalText>Forma de Pagamento</SubTotalText>

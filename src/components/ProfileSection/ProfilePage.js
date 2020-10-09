@@ -34,10 +34,9 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import { useHistory } from "react-router-dom";
 import { BASE_URL } from "../../constants/urls";
-import Link from "@material-ui/core/Link";
 
 import {
-  goToAddAdress,
+  goToEditAddress, goToEditProfile,
   goToFeed,
   goToCart,
   goToProfile,
@@ -120,28 +119,24 @@ function ProfilePage() {
 
       {profile !== null && (
         <DataProfile>
-          <Link href={"/editProfile"} color={"textPrimary"}>
             <ContainerIcon>
               <span>{profile.name}</span>
-              <CreateOutlinedIcon />
+              <CreateOutlinedIcon onClick={() => goToEditProfile(history) }/>
             </ContainerIcon>
 
             <span>{profile.email}</span>
             <span>{profile.cpf}</span>
-          </Link>
         </DataProfile>
       )}
 
       {profile !== null && (
         <ContainerAddress>
-          <Link href={"/editaddress"} color={"textPrimary"}>
             <TitleAddress>Endereço cadastrado</TitleAddress>
 
             <ContainerIconAddres>
               <Address>{profile.address}</Address>
-              <CreateOutlinedIcon />
+              <CreateOutlinedIcon onClick={() => goToEditAddress(history)}/>
             </ContainerIconAddres>
-          </Link>
         </ContainerAddress>
       )}
 

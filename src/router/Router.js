@@ -40,7 +40,13 @@ function Router(props) {
         </Route>
 
         <Route exact path="/cart">
-          <CartPage carrinho={props.carrinho}/>
+          <CartPage 
+          setCarrinho={props.setCarrinho}
+          carrinho={props.carrinho}
+          setRestaurant={props.setRestaurant}
+          restaurant={props.restaurant}
+          />
+          
         </Route>
 
         <Route exact path="/addaddress">
@@ -61,6 +67,8 @@ function Router(props) {
 
         <Route exact path="/restaurant/:id">
           <RestaurantPage 
+          setRestaurant={props.setRestaurant}
+          restaurant={props.restaurant}
           carrinho={props.carrinho}
           setCarrinho={props.setCarrinho}
           onClickCarrinho={props.onClickCarrinho}

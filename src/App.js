@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState,} from "react";
 import Router from "./router/Router";
 
 
@@ -8,7 +8,10 @@ function App() {
   // onClick carrinho passado por props até product details, para renderizá-los no cartPage.
 
   const [carrinho, setCarrinho] = useState([]);
+  const [restaurant, setRestaurant] = useState({});
 
+
+  // ===== CLICK CARRINHO passado por props =====
   let soma = 0;
 
   const onClickCarrinho = (id, products, resetState, quantidade, setCounter) => {
@@ -50,9 +53,13 @@ function App() {
   return (
     <div>
       <Router 
+      setRestaurant={setRestaurant}
+      restaurant={restaurant}
       setCarrinho={setCarrinho}
       carrinho={carrinho}
-      onClickCarrinho={onClickCarrinho}/>
+      onClickCarrinho={onClickCarrinho}
+      />
+      
     </div>
   );
 }

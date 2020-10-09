@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { theme } from "../../constants/themes";
 import { makeStyles } from "@material-ui/core/styles";
-import ProductDetail from "../../components/ProductDetail/ProductDetail"
 // Material
 import { ThemeProvider } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
@@ -51,9 +50,7 @@ function CartPage(props) {
   // Estado
   const [value, setValue] = useState("cart");
   const [checked, setChecked] = useState(false);
-  const [order, setOrder] = useState({});
   const [address, setAddress] = useState(null);
-  const [infos, setInfos] = useState({});
 
 
 
@@ -73,7 +70,7 @@ function CartPage(props) {
 
   // Pegar endereço do cliente
 
-  const getAddress = (props) => {
+  const getAddress = () => {
     const request = axios.get(
       "https://us-central1-missao-newton.cloudfunctions.net/rappi4A/profile/address",
       {
@@ -94,34 +91,13 @@ function CartPage(props) {
       });
   };
 
-  // Pegar Pedidos
-
-  const getOrder = () => {
-    const request = axios.get(
-      `https://us-central1-missao-newton.cloudfunctions.net/rappi4A/active-order`,
-      {
-        headers: {
-          auth:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Im9hNnlRTm56RXN6YUlYbndMSEhOIiwibmFtZSI6IkRhbmllbCIsImVtYWlsIjoiZGFuQGZ1dHVyZTQuY29tIiwiY3BmIjoiMTMxLjMxMS4xMTEtMTEiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiUi4geHh4eCBCcmF6LCAxNzM3IC0gVmlsYSBOLiBDb25jZWnDp8OjbyIsImlhdCI6MTYwMTkyNTk5NX0.WSyb9hsFmfaTSu_icgzWzeUudwsSmbM0Bol9Ll7keUs",
-        },
-      }
-    );
-    request
-      .then((response) => {
-        console.log(response.data);
-        setOrder(response.data.order);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  
 
   useEffect(() => {
     if(localStorage.getItem("token") === null) {
       history.push("/")
     }
 
-    getOrder();
     getAddress();
   }, []);
 
@@ -130,7 +106,17 @@ function CartPage(props) {
     setChecked(!checked);
   };
 
-  console.log(props.carrinho)
+
+  const removeItemOnCart = (id) => {
+    const cart = [...props.carrinho]
+
+    const cartWithoutItem = cart.filter((item) => {
+      return id !== item.id
+    })
+
+    props.setCarrinho(cartWithoutItem)
+
+  }
 
 
   return (
@@ -157,6 +143,10 @@ function CartPage(props) {
       )}
 
       {/* Infos do Restaurante */}
+      <RestaurantName>{props.restaurant.name}</RestaurantName>
+      <GrayTitle>{props.restaurant.address}</GrayTitle>
+      <GrayTitle>{props.restaurant.shipping}min</GrayTitle>
+
 
       {/* Produtos */}
      
@@ -176,7 +166,7 @@ function CartPage(props) {
           <ProductName>{item.name}</ProductName>
           <ProductTitle>{item.description}</ProductTitle>
           <ProductPrice>R${item.price}</ProductPrice>
-          <ButtonDelete>Remover</ButtonDelete>
+          <ButtonDelete onClick={() => removeItemOnCart(item.id)}>Remover</ButtonDelete>
           
         </ContainerInfos>
       </CardBox>

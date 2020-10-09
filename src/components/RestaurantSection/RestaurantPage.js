@@ -24,7 +24,6 @@ function RestaurantPage(props) {
   const history = useHistory();
   const pathParams = useParams();
   const [products, setProducts] = useState([]);
-  const [restaurant, setRestaurant] = useState("");
 
   const getRestaurantDetail = () => {
     const request = axios.get(
@@ -39,7 +38,7 @@ function RestaurantPage(props) {
     request
       .then((response) => {
         setProducts(response.data.restaurant.products);
-        setRestaurant(response.data.restaurant);
+        props.setRestaurant(response.data.restaurant);
       })
       .catch((err) => {
         console.log(err);
@@ -70,15 +69,15 @@ function RestaurantPage(props) {
         <Title>Restaurante</Title>
       </ContainerTitle>
       <ContainerImg>
-        <RestaurantImg src={restaurant.logoUrl} />
+        <RestaurantImg src={props.restaurant.logoUrl} />
       </ContainerImg>
-      <RestaurantName>{restaurant.name}</RestaurantName>
-      <GrayTitle>{restaurant.category}</GrayTitle>
+      <RestaurantName>{props.restaurant.name}</RestaurantName>
+      <GrayTitle>{props.restaurant.category}</GrayTitle>
       <ContainerInfos>
-        <GrayTitle>{restaurant.deliveryTime} min</GrayTitle>
-        <GrayTitle>Frete R${restaurant.shipping},00</GrayTitle>
+        <GrayTitle>{props.restaurant.deliveryTime} min</GrayTitle>
+        <GrayTitle>Frete R${props.restaurant.shipping},00</GrayTitle>
       </ContainerInfos>
-      <GrayTitle>{restaurant.address}</GrayTitle>
+      <GrayTitle>{props.restaurant.address}</GrayTitle>
 
       {/* Filtro de categorias mapeados */}
 

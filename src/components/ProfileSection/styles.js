@@ -151,3 +151,20 @@ export const BaseFlex = styled.div`
   position: relative;
   align-items: center;
 `;
+
+export const ContainerTitle = styled.div`
+  display: flex;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  width: 100vw;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+export const TitleRestaurant = styled.p`
+  color: black;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  text-align: center;
+  font-weight: 600;
+  margin-right: 7rem;
+`;

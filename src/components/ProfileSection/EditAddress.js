@@ -74,7 +74,7 @@ function EditAddress() {
   return (
     <ThemeProvider theme={theme}>
       <AddressContainer>
-        <Title>Meu Endereço adrres</Title>
+        <Title>Meu Endereço</Title>
         <form id={"addres_form"}>
           <TextField
             value={form.street}

@@ -116,9 +116,12 @@ export const BaseModalContainer = styled.div`
 `;
 
 export const ModalContainer = styled.div`
-  width: 90vw;
+  width: 80vw;
   height: 50vw;
   background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const ModalTitle = styled.p`

@@ -123,7 +123,7 @@ function CartPage(props) {
   };
 
   const productsArray = () =>{
-    props.carrinho.map((item) => {
+    props.carrinho.forEach((item) => {
       return {
         id: item.id,
         quantity: item.quantidade
@@ -137,7 +137,17 @@ function CartPage(props) {
       paymentMethod: form.pagamento
     }
 
-    const request = axios.post(`"https://us-central1-missao-newton.cloudfunctions.net/rappi4A/restaurants/${props.restaurant.id}/order`)
+    const request = axios.post(`"https://us-central1-missao-newton.cloudfunctions.net/rappi4A/restaurants/${props.restaurant.id}/order`, body, {
+      headers: {
+        auth: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Im9hNnlRTm56RXN6YUlYbndMSEhOIiwibmFtZSI6IkRhbmllbCIsImVtYWlsIjoiZGFuQGZ1dHVyZTQuY29tIiwiY3BmIjoiMTMxLjMxMS4xMTEtMTEiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiUi4geHh4eCBCcmF6LCAxNzM3IC0gVmlsYSBOLiBDb25jZWnDp8OjbyIsImlhdCI6MTYwMTkyNTk5NX0.WSyb9hsFmfaTSu_icgzWzeUudwsSmbM0Bol9Ll7keUs"
+      }
+    })
+
+    request.then((response) => {
+      console.log(response.data)
+    }).catch(err => {
+      console.log(err.data)
+    })
   }
 
   // remove item do carrinho
@@ -228,13 +238,13 @@ function CartPage(props) {
 
       <CheckBoxContainer>
 
-        <InputCheck type="radio" checked={!checked} onChange={handleInputChange} name="money" value="money"/>
+        <InputCheck type="radio" onChange={handleInputChange} name="pagamento" value="money"/>
         <LabelCheckBox>Dinheiro</LabelCheckBox> <br />
         <br />
-        <InputCheck type="radio" checked={checked} onChange={handleInputChange} name="creditcard" value="creditcard"/>
+        <InputCheck type="radio" onChange={handleInputChange} name="pagamento" value="creditcard"/>
         <LabelCheckBox>Cartão de crédito</LabelCheckBox>
         {/* Button */}
-      <Button type="submit">Confirmar</Button>
+      <Button type="submit" onClick={placeOrder}>Confirmar</Button>
       </CheckBoxContainer>
       </FormControl>
 

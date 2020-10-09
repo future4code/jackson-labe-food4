@@ -82,6 +82,7 @@ export const Payment = styled.div`
 
 export const CheckBoxContainer = styled.div`
   margin-top: 1rem;
+  height: 30vh;
 `;
 
 export const LabelCheckBox = styled.label`
@@ -93,7 +94,7 @@ export const LabelCheckBox = styled.label`
 `;
 
 export const Button = styled.button`
-  width: 334px;
+  width: 90vw;
   height: 42px;
   border-radius: 2px;
   background-color: #e86e5a;

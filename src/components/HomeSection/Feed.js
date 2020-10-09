@@ -127,7 +127,7 @@ const Feed = () => {
     
   }
 
-      })
+      
     
   useEffect(() => {
     if(localStorage.getItem("token") === null) {

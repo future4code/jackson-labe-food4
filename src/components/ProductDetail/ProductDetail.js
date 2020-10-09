@@ -23,6 +23,7 @@ import {
   ButtonProduct,
   ModalContainer,
   ModalTitle,
+  ButtonDelete
 } from "./styles";
 
 // function posicionamento modal material
@@ -61,8 +62,7 @@ const useStyles = makeStyles((theme) => ({
 function ProductDetail(props) {
   // states
   const [open, setOpen] = useState(false);
-  const [carrinho, setCarrinho] = useState([]);
-  const [quantidade, setQuantidade] = useState(0);
+  const [counter, setCounter] = useState(0);
 
   // ====== MODAL ======
 
@@ -98,60 +98,27 @@ function ProductDetail(props) {
   // handleSubmit pra não atualizar a page.
   const handleSubmit = (event) => {
     event.preventDefault();
-    resetState();
   };
 
   // onChange select.
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     onChange(name, value);
-    console.log(form.quantidade);
   };
 
-  // ====== ADICIONAR AO CARRINHO ======
+ 
 
-  const onClickCarrinho = (id) => {
-    let newCart = [...carrinho];
+  // Remover item do carrinho
+  const removeItem = (id) => {
+    const cartAtt = [...props.carrinho]
 
-    // Se tiver um produto encontrado no array e esse id for igual ao do produto
-    const addProduct = props.products.map((produto) => {
-      if (id === produto.id) {
-        newCart.push({
-          name: produto.name,
-          price: produto.price,
-          description: produto.description,
-        });
-      }
-      return false;
-    });
+    const removeProduct = cartAtt.filter((produto) => {
+      return id !== produto.id
+    })
 
-    if (addProduct === undefined) {
-      console.error("Produto inválido");
-      return;
-    }
-
-    const foundProductInCart = newCart.map((item) => {
-      if (id === item.id) {
-        return true;
-      } else {
-        return false;
-      }
-    });
-
-    if (foundProductInCart === undefined) {
-      const newProduct = setQuantidade(1);
-      newCart = [newProduct, ...newCart];
-    } else {
-      newCart = newCart.map((item) => {
-        if (id === item.id) {
-          return setQuantidade(quantidade + 1);
-        } else {
-          return item;
-        }
-      });
-    }
-    setCarrinho(newCart);
-  };
+    props.setCarrinho(removeProduct)
+    setCounter(0)
+  }
 
   // modal body
   const body = (
@@ -176,7 +143,7 @@ function ProductDetail(props) {
             required
           >
             {/* Options */}
-            <option value={0} />
+            <option value=""></option>
             <option value={1}>1</option>
             <option value={2}>2</option>
             <option value={3}>3</option>
@@ -192,7 +159,7 @@ function ProductDetail(props) {
             type="submit"
             color="primary"
             className={classes.margin}
-            onClick={() => onClickCarrinho(props.id)}
+            onClick={() => props.onClickCarrinho(props.id, props.products, resetState, form.quantidade, setCounter)}
           >
             adicionar ao carrinho
           </Button>
@@ -201,8 +168,6 @@ function ProductDetail(props) {
     </ModalContainer>
   );
 
-  console.log(carrinho);
-  console.log(props.id);
 
   return (
     <Container>
@@ -213,13 +178,13 @@ function ProductDetail(props) {
         {/* Container Informações Gerais */}
         <ContainerInfos>
           {/* Infos */}
-          <CounterProduct>{form.quantidade}</CounterProduct>
+          {counter > 0 && <CounterProduct>{counter}</CounterProduct>}
           <ProductName>{props.name}</ProductName>
           <ProductTitle>{props.description}</ProductTitle>
           <ProductPrice>R${props.price}</ProductPrice>
-          <ButtonProduct type="button" onClick={handleOpen}>
+          {counter > 0 ? <ButtonDelete onClick={() => removeItem(props.id)}>Remover</ButtonDelete> : <ButtonProduct type="button" onClick={handleOpen}>
             Adicionar
-          </ButtonProduct>
+          </ButtonProduct>}
           <Modal open={open} onClose={handleClose}>
             {body}
           </Modal>

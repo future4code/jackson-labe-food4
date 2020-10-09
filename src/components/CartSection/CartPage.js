@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import axios from "axios";
 import { theme } from "../../constants/themes";
 import { makeStyles } from "@material-ui/core/styles";
-import useRequestData from "../../services/useRequestData";
-
 // Material
 import { ThemeProvider } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
@@ -35,17 +32,28 @@ import {
   Button,
   EmptyCart,
   BaseFlexNav,
+  ContainerProductCard,
+  CardBox,
+  BoxImg,
+  ContainerInfos,
+  ProductName,
+  ProductTitle,
+  ProductPrice,
+  CounterProduct,
+  ButtonProduct,
+  ButtonDelete
 } from "./styles";
 import { goToCart, goToFeed, goToProfile } from "../../router/goToPages";
 import { useHistory } from "react-router-dom";
 
-function CartPage() {
+function CartPage(props) {
   // Estado
   const [value, setValue] = useState("cart");
   const [checked, setChecked] = useState(false);
-  const [order, setOrder] = useState({});
   const [address, setAddress] = useState(null);
-  const [infos, setInfos] = useState({});
+
+
+
 
   const history = useHistory()
 
@@ -83,34 +91,13 @@ function CartPage() {
       });
   };
 
-  // Pegar Pedidos
-
-  const getOrder = () => {
-    const request = axios.get(
-      `https://us-central1-missao-newton.cloudfunctions.net/rappi4A/active-order`,
-      {
-        headers: {
-          auth:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Im9hNnlRTm56RXN6YUlYbndMSEhOIiwibmFtZSI6IkRhbmllbCIsImVtYWlsIjoiZGFuQGZ1dHVyZTQuY29tIiwiY3BmIjoiMTMxLjMxMS4xMTEtMTEiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiUi4geHh4eCBCcmF6LCAxNzM3IC0gVmlsYSBOLiBDb25jZWnDp8OjbyIsImlhdCI6MTYwMTkyNTk5NX0.WSyb9hsFmfaTSu_icgzWzeUudwsSmbM0Bol9Ll7keUs",
-        },
-      }
-    );
-    request
-      .then((response) => {
-        console.log(response.data);
-        setOrder(response.data.order);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  
 
   useEffect(() => {
     if(localStorage.getItem("token") === null) {
       history.push("/")
     }
 
-    getOrder();
     getAddress();
   }, []);
 
@@ -118,6 +105,18 @@ function CartPage() {
   const checkState = () => {
     setChecked(!checked);
   };
+
+
+  const removeItemOnCart = (id) => {
+    const cart = [...props.carrinho]
+
+    const cartWithoutItem = cart.filter((item) => {
+      return id !== item.id
+    })
+
+    props.setCarrinho(cartWithoutItem)
+
+  }
 
 
   return (
@@ -144,26 +143,46 @@ function CartPage() {
       )}
 
       {/* Infos do Restaurante */}
+      <RestaurantName>{props.restaurant.name}</RestaurantName>
+      <GrayTitle>{props.restaurant.address}</GrayTitle>
+      <GrayTitle>{props.restaurant.shipping}min</GrayTitle>
+
 
       {/* Produtos */}
-      {order === null && <EmptyCart>Seu carrinho está vazio!</EmptyCart>}
-      {order !== null && (
-        <div>
-          <RestaurantName>{order.restaurantName}</RestaurantName>
-          <GrayTitle>{infos.address}</GrayTitle>
-          <GrayTitle>{infos.deliveryTime}min</GrayTitle>
-        </div>
-      )}
+     
+      {props.carrinho.length === 0 && <EmptyCart>Seu carrinho está vazio!</EmptyCart>}
+      {props.carrinho.length > 0 && props.carrinho.map((item) => {
+        return (
+          <ContainerProductCard>
+      {/* Container Produto */}
+      <CardBox>
+        <BoxImg src={item.image} />
+
+        {/* Container Informações Gerais */}
+        <ContainerInfos>
+          {/* Infos */}
+          
+          <CounterProduct>{item.quantidade}</CounterProduct>
+          <ProductName>{item.name}</ProductName>
+          <ProductTitle>{item.description}</ProductTitle>
+          <ProductPrice>R${item.price}</ProductPrice>
+          <ButtonDelete onClick={() => removeItemOnCart(item.id)}>Remover</ButtonDelete>
+          
+        </ContainerInfos>
+      </CardBox>
+    </ContainerProductCard>
+        )
+      })}
 
       {/* Pagamento */}
-      <TaxBox>{order === null && <FreteText>Frete R$0,00</FreteText>}</TaxBox>
+      <TaxBox>{props.carrinho === null && <FreteText>Frete R$0,00</FreteText>}</TaxBox>
       <SubTotal>
         <SubTotalText>SUBTOTAL</SubTotalText>
-        {order === null ? (
+        {/* {props.carrinho === null ? (
           <TotalText>R$0,00</TotalText>
         ) : (
           <TotalText>R${order.totalPrice}</TotalText>
-        )}
+        )} */}
       </SubTotal>
       <Payment>
         <SubTotalText>Forma de Pagamento</SubTotalText>

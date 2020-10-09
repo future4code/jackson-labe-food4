@@ -3,15 +3,19 @@ import { useHistory } from "react-router-dom";
 import { TextField, Button, ThemeProvider } from "@material-ui/core";
 import useForm from "../../Hooks/useForm";
 import { editUser } from "../../services/PutProfile";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import {goToProfile} from "../../router/goToPages"
 
 import { theme } from "../../constants/themes";
 import styled from "styled-components";
+import {ContainerTitle, TitleRestaurant} from "./styles"
 
 const AddressContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100vw;
+  justify-content: center;
 
   form {
     display: flex;
@@ -25,14 +29,6 @@ const AddressContainer = styled.div`
   }
 `;
 
-const Title = styled.div`
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 16px;
-  letter-spacing: -0.39px;
-  text-align: center;
-  margin-top: 7vw;
-`;
 
 function EditProfile() {
   const history = useHistory();
@@ -66,7 +62,10 @@ function EditProfile() {
   return (
     <ThemeProvider theme={theme}>
       <AddressContainer>
-        <Title>Editar</Title>
+      <ContainerTitle>
+        <ArrowBackIosIcon onClick={() => goToProfile(history)} />
+        <TitleRestaurant>Editar</TitleRestaurant>
+      </ContainerTitle>
         <form id={"addres_form"}>
           <TextField
             value={form.name}

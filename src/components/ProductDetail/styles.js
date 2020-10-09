@@ -73,11 +73,31 @@ export const ButtonProduct = styled.button`
   width: 25vw;
   border-bottom-right-radius: 8px;
   border-top-left-radius: 8px;
+  border: solid 1px black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  background: none;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const ButtonDelete = styled.button`
+  padding: 5px;
+  width: 25vw;
+  border-bottom-right-radius: 8px;
+  border-top-left-radius: 8px;
   border: solid 1px #e86e5a;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: red;
+  color: #e86e5a;
   background: none;
   position: absolute;
   bottom: 0;

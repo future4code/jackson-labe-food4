@@ -25,3 +25,12 @@ export const goToProfile = (history) => {
 export const goToRestaurant = (history, id) => {
   history.push(`/restaurant/${id}`);
 };
+
+export const goToEditProfile = (history) => {
+  history.push(`/editProfile`);
+};
+
+export const goToEditAddress = (history) => {
+  history.push(`/editaddress`);
+};
+

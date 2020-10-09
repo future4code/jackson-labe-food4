@@ -12,10 +12,13 @@ import {
 
 const UpperMenuCat = ({ categories, setInputCategories }) => {
   // renderizar menu
-  const renderCategories = () =>
+  const renderCategories = () => 
+    
     categories.map((item) => {
       return (
+        
         <ParagrafCat
+
           key={item}
           onClick={() => {
             setInputCategories(item);
@@ -23,6 +26,7 @@ const UpperMenuCat = ({ categories, setInputCategories }) => {
         >
           {item}
         </ParagrafCat>
+       
       );
     });
 

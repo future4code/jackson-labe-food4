@@ -67,7 +67,7 @@ const Feed = () => {
   const offMenu = () => {
     setShowMenu(true);
     setShowSearch(false);
-  
+    setInputCategories("")
     setShowRender(true)
   };
 
@@ -106,7 +106,7 @@ const Feed = () => {
   }
   useEffect(() => {
     filterRestaurant()
-    console.log(restaurants)
+    
   },[inputRestaurant])
 
   const renderCards = () => {
@@ -174,6 +174,7 @@ const Feed = () => {
         }
         {showMenu && (
           <UpperMenuCat
+            
             setInputCategories={setInputCategories}
             categories={categories}
           />

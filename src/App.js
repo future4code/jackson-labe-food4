@@ -26,7 +26,8 @@ function App() {
           price: produto.price,
           description: produto.description,
           quantidade: Number(quantidade),
-          image: produto.photoUrl
+          image: produto.photoUrl,
+          shipping: produto.shipping
         });
       }
       return false;

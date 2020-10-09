@@ -48,7 +48,6 @@ function App() {
     resetState()
   };
 
-  console.log(carrinho)
 
   return (
     <div>

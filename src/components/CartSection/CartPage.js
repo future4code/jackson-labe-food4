@@ -10,6 +10,8 @@ import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import PersonOutlineOutlinedIcon from "@material-ui/icons/PersonOutlineOutlined";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import FormControl from "@material-ui/core/FormControl";
+
 
 // Component
 
@@ -41,10 +43,12 @@ import {
   ProductPrice,
   CounterProduct,
   ButtonProduct,
-  ButtonDelete
+  ButtonDelete,
+  InputCheck
 } from "./styles";
 import { goToCart, goToFeed, goToProfile } from "../../router/goToPages";
 import { useHistory } from "react-router-dom";
+import {useForm} from "../../services/useForm"
 
 function CartPage(props) {
   // Estado
@@ -52,6 +56,19 @@ function CartPage(props) {
   const [checked, setChecked] = useState(false);
   const [address, setAddress] = useState(null);
 
+
+  const { form, onChange, resetState } = useForm({
+    pagamento: ""
+  });
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    onChange(name, value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
 
 
 
@@ -83,7 +100,6 @@ function CartPage(props) {
 
     request
       .then((response) => {
-        console.log(response.data);
         setAddress(response.data.address);
       })
       .catch((err) => {
@@ -106,7 +122,25 @@ function CartPage(props) {
     setChecked(!checked);
   };
 
+  const productsArray = () =>{
+    props.carrinho.map((item) => {
+      return {
+        id: item.id,
+        quantity: item.quantidade
+      }
+    })
+  }
 
+  const placeOrder = () => {
+    const body = {
+      products: productsArray,
+      paymentMethod: form.pagamento
+    }
+
+    const request = axios.post(`"https://us-central1-missao-newton.cloudfunctions.net/rappi4A/restaurants/${props.restaurant.id}/order`)
+  }
+
+  // remove item do carrinho
   const removeItemOnCart = (id) => {
     const cart = [...props.carrinho]
 
@@ -118,7 +152,7 @@ function CartPage(props) {
 
   }
 
-
+  console.log(form.pagamento)
   return (
     <BaseFlex>
       {/* Intro */}
@@ -143,9 +177,10 @@ function CartPage(props) {
       )}
 
       {/* Infos do Restaurante */}
-      <RestaurantName>{props.restaurant.name}</RestaurantName>
+      {props.carrinho.length > 0 && <div><RestaurantName>{props.restaurant.name}</RestaurantName>
       <GrayTitle>{props.restaurant.address}</GrayTitle>
-      <GrayTitle>{props.restaurant.shipping}min</GrayTitle>
+      <GrayTitle>{props.restaurant.deliveryTime}min</GrayTitle></div>}
+      
 
 
       {/* Produtos */}
@@ -189,16 +224,22 @@ function CartPage(props) {
       </Payment>
 
       {/* Checkbox */}
+      <FormControl onSubmit={handleSubmit}>
+
       <CheckBoxContainer>
-        <input type="radio" checked={!checked} onChange={checkState} />
+
+        <InputCheck type="radio" checked={!checked} onChange={handleInputChange} name="money" value="money"/>
         <LabelCheckBox>Dinheiro</LabelCheckBox> <br />
         <br />
-        <input type="radio" checked={checked} onChange={checkState} />
+        <InputCheck type="radio" checked={checked} onChange={handleInputChange} name="creditcard" value="creditcard"/>
         <LabelCheckBox>Cartão de crédito</LabelCheckBox>
+        {/* Button */}
+      <Button type="submit">Confirmar</Button>
       </CheckBoxContainer>
+      </FormControl>
 
-      {/* Button */}
-      <Button>Confirmar</Button>
+
+      
 
       {/* Botton Nav */}
       <BaseFlexNav>

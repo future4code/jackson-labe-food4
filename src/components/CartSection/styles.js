@@ -81,7 +81,6 @@ export const Payment = styled.div`
 `;
 
 export const CheckBoxContainer = styled.div`
-  margin-left: 1rem;
   margin-top: 1rem;
 `;
 
@@ -106,9 +105,8 @@ export const Button = styled.button`
   font-size: 16px;
   letter-spacing: -0.39px;
   text-align: center;
-  margin-left: 20px;
+  margin-left: 1.5rem;
   margin-top: 1.5rem;
-  margin-bottom: 5rem;
   border: 0;
 `;
 
@@ -118,6 +116,10 @@ export const EmptyCart = styled.p`
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 `;
+
+export const InputCheck = styled.input`
+margin-left: 1rem;
+`
 
 
 // CARD PRODUTO

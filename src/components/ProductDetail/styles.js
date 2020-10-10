@@ -124,7 +124,7 @@ export const ModalContainer = styled.div`
   align-items: center;
 `;
 
-// 
+
 
 export const ModalTitle = styled.p`
   text-align: center;

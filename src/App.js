@@ -18,25 +18,26 @@ function App() {
     let newCart = [...carrinho];
 
     // adicionando o item selecionado a um array.
-    const addProduct = products.map((produto) => {
-      if (id === produto.id) {
-        newCart.push({
-          id: produto.id,
-          name: produto.name,
-          price: produto.price,
-          description: produto.description,
-          quantidade: Number(quantidade),
-          image: produto.photoUrl,
-          shipping: produto.shipping
-        });
-      }
-      return false;
-    });
-
-    if (addProduct === undefined) {
-      console.error("Produto inválido");
-      return;
+    if(quantidade > 0) {
+      const addProduct = products.map((produto) => {
+        if (id === produto.id) {
+          newCart.push({
+            id: produto.id,
+            name: produto.name,
+            price: produto.price,
+            description: produto.description,
+            quantidade: Number(quantidade),
+            image: produto.photoUrl,
+            shipping: produto.shipping
+          });
+        }
+        return false;
+      });
+    } else {
+      alert('Insira um valor válido.')
     }
+    
+
 
 
     // filtrando os itens do carrinho por quantidade e setando o contador.

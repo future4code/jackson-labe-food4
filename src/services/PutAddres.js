@@ -2,6 +2,9 @@ import axios from "axios";
 import { goToFeed } from "../router/goToPages";
 import { BASE_URL } from "../constants/urls";
 
+
+
+
 //Bate na api de criar endereço
 export const addresUserCard = (body, history) => {
   axios
@@ -12,7 +15,7 @@ export const addresUserCard = (body, history) => {
     })
     .then((response) => {
       //envia token
-      localStorage.setItem("tokenAddres", response.data.token);
+      localStorage.setItem("token", response.data.token);
       goToFeed(history);
     })
     .catch((error) => {

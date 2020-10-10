@@ -60,7 +60,7 @@ function SignUpPage() {
 
       localStorage.setItem("token", request.data.token)
 
-      history.push("/addadress")
+      history.push("/addaddress")
     } catch (error) {
       alert("Cadastro falhou :(, tente novamente!")
       console.error(error)

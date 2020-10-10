@@ -133,7 +133,7 @@ const Feed = () => {
     if(localStorage.getItem("token") === null) {
       history.push("/")
     }
-  }, [])  
+  }, [history])  
 
 
   return (

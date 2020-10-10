@@ -124,6 +124,8 @@ export const ModalContainer = styled.div`
   align-items: center;
 `;
 
+// 
+
 export const ModalTitle = styled.p`
   text-align: center;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,

@@ -70,11 +70,19 @@ export const FreteText = styled.p`
 export const TotalText = styled(FreteText)`
   font-size: 18px;
   color: #e86e5a;
+  margin-right: 2rem;
 `;
 
 export const SubTotalText = styled(FreteText)`
   font-weight: normal;
 `;
+
+export const PaymentMethod = styled(SubTotalText)`
+text-align: start;
+margin-right:0;
+
+
+`
 
 export const Payment = styled.div`
   width: 90vw;

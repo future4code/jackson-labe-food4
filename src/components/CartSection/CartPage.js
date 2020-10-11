@@ -41,9 +41,9 @@ import {
   ProductTitle,
   ProductPrice,
   CounterProduct,
-  ButtonProduct,
   ButtonDelete,
   InputCheck,
+  PaymentMethod
 } from "./styles";
 import { goToCart, goToFeed, goToProfile } from "../../router/goToPages";
 import { useHistory } from "react-router-dom";
@@ -162,6 +162,9 @@ function CartPage(props) {
     props.setCarrinho(cartWithoutItem);
   };
 
+  const totalPrice = cart.reduce((total, item) => {
+    return total + (item.price * item.quantidade)
+  }, 0)
 
 
   return (
@@ -229,17 +232,17 @@ function CartPage(props) {
       {/* Pagamento */}
 
      
-       
-          <FreteText>FRETE R${props.restaurant.shipping}</FreteText>
+        {props.carrinho.length > 0 && <div><FreteText>FRETE R${props.restaurant.shipping}</FreteText>
           <SubTotal>
             <SubTotalText>SUBTOTAL</SubTotalText>
-            <TotalText>R$</TotalText>
-          </SubTotal>
+      <TotalText>R${totalPrice}</TotalText>
+          </SubTotal></div>}
+          
         
   
 
       <Payment>
-        <SubTotalText>Forma de Pagamento</SubTotalText>
+        <PaymentMethod>Forma de Pagamento</PaymentMethod>
       </Payment>
 
       {/* Checkbox */}

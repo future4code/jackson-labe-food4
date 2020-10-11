@@ -55,6 +55,7 @@ function CartPage(props) {
   const [address, setAddress] = useState(null);
 
   // constantes
+  // Desestruturando o carrinho
   let cart = [...props.carrinho];
   let totalPriceSum = 0;
 
@@ -115,7 +116,6 @@ function CartPage(props) {
 
   // ==== Bloco pra gerar a requisição de pedido ====
 
-  // Desestruturando o carrinho
 
   // Criando um array pra passar pro body
   const productsArray = cart.map((item) => {

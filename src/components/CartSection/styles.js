@@ -64,6 +64,7 @@ export const FreteText = styled.p`
   font-size: 1rem;
   font-weight: 600;
   text-align: end;
+  margin-right: 3rem;
 `;
 
 export const TotalText = styled(FreteText)`

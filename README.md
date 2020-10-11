@@ -12,7 +12,3 @@ Tela Carrinho ;
 Tela Profile ;
 Tela Editar Dados do User ;
 
-
-### O QUE NÃO FUNCIONA:
-
-Requisição de Fazer Pedidos

@@ -11,8 +11,7 @@ import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import PersonOutlineOutlinedIcon from "@material-ui/icons/PersonOutlineOutlined";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import FormControl from "@material-ui/core/FormControl";
-
-// Component
+import AccessTimeIcon from "@material-ui/icons/AccessTime";
 
 // Styled
 import {
@@ -41,9 +40,14 @@ import {
   ProductTitle,
   ProductPrice,
   CounterProduct,
-  ButtonProduct,
   ButtonDelete,
   InputCheck,
+  PaymentMethod,
+  OrderContainer,
+  OrderContainerInfo,
+  OrderProgress,
+  OrderRestaurantTitle,
+  OrderSubTotal,
 } from "./styles";
 import { goToCart, goToFeed, goToProfile } from "../../router/goToPages";
 import { useHistory } from "react-router-dom";
@@ -53,10 +57,12 @@ function CartPage(props) {
   // Estado
   const [value, setValue] = useState("cart");
   const [address, setAddress] = useState(null);
+  const [orderContainer, setOrderContainer] = useState(false);
+  const [order, setOrder] = useState(null);
 
   // constantes
+  // Desestruturando o carrinho
   let cart = [...props.carrinho];
-  let totalPriceSum = 0;
 
   const { form, onChange, resetState } = useForm({
     pagamento: "",
@@ -91,8 +97,7 @@ function CartPage(props) {
       "https://us-central1-missao-newton.cloudfunctions.net/rappi4A/profile/address",
       {
         headers: {
-          auth:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Im9hNnlRTm56RXN6YUlYbndMSEhOIiwibmFtZSI6IkRhbmllbCIsImVtYWlsIjoiZGFuQGZ1dHVyZTQuY29tIiwiY3BmIjoiMTMxLjMxMS4xMTEtMTEiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiUi4geHh4eCBCcmF6LCAxNzM3IC0gVmlsYSBOLiBDb25jZWnDp8OjbyIsImlhdCI6MTYwMTkyNTk5NX0.WSyb9hsFmfaTSu_icgzWzeUudwsSmbM0Bol9Ll7keUs",
+          auth: localStorage.getItem("token"),
         },
       }
     );
@@ -100,6 +105,7 @@ function CartPage(props) {
     request
       .then((response) => {
         setAddress(response.data.address);
+        setOrderContainer(true);
       })
       .catch((err) => {
         console.log(err);
@@ -115,8 +121,6 @@ function CartPage(props) {
   }, []);
 
   // ==== Bloco pra gerar a requisição de pedido ====
-
-  // Desestruturando o carrinho
 
   // Criando um array pra passar pro body
   const productsArray = cart.map((item) => {
@@ -138,18 +142,16 @@ function CartPage(props) {
       body,
       {
         headers: {
-          auth:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Im9hNnlRTm56RXN6YUlYbndMSEhOIiwibmFtZSI6IkRhbmllbCIsImVtYWlsIjoiZGFuQGZ1dHVyZTQuY29tIiwiY3BmIjoiMTMxLjMxMS4xMTEtMTEiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiUi4geHh4eCBCcmF6LCAxNzM3IC0gVmlsYSBOLiBDb25jZWnDp8OjbyIsImlhdCI6MTYwMTkyNTk5NX0.WSyb9hsFmfaTSu_icgzWzeUudwsSmbM0Bol9Ll7keUs",
+          auth: localStorage.getItem("token"),
         },
       }
     );
 
     request
       .then((response) => {
-        console.log(response.data);
-      })
+        console.log(response.data);      })
       .catch((err) => {
-        console.log(err.data);
+        console.log(err);
       });
   };
 
@@ -164,7 +166,13 @@ function CartPage(props) {
     props.setCarrinho(cartWithoutItem);
   };
 
+  // somando o preço dos produtos
+  const totalPrice = cart.reduce((total, item) => {
+    return total + item.price * item.quantidade;
+  }, 0);
 
+  console.log(props.carrinho)
+  console.log(form.pagamento)
 
   return (
     <BaseFlex>
@@ -200,6 +208,7 @@ function CartPage(props) {
 
       {/* Produtos */}
 
+      {/* Se não tiver produtos. */}
       {props.carrinho.length === 0 && (
         <EmptyCart>Seu carrinho está vazio!</EmptyCart>
       )}
@@ -230,18 +239,18 @@ function CartPage(props) {
 
       {/* Pagamento */}
 
-     
-       
+      {props.carrinho.length > 0 && (
+        <div>
           <FreteText>FRETE R${props.restaurant.shipping}</FreteText>
           <SubTotal>
             <SubTotalText>SUBTOTAL</SubTotalText>
-            <TotalText>R$</TotalText>
+            <TotalText>R${totalPrice}</TotalText>
           </SubTotal>
-        
-  
+        </div>
+      )}
 
       <Payment>
-        <SubTotalText>Forma de Pagamento</SubTotalText>
+        <PaymentMethod>Forma de Pagamento</PaymentMethod>
       </Payment>
 
       {/* Checkbox */}
@@ -271,6 +280,18 @@ function CartPage(props) {
 
       {/* Botton Nav */}
       <BaseFlexNav>
+        {/* {order !== null && (
+          <OrderContainer>
+            <AccessTimeIcon fontSize="large" />
+
+            <OrderContainerInfo>
+              <OrderProgress>Pedido em andamento</OrderProgress>
+              <OrderRestaurantTitle>{props.restaurant.name}</OrderRestaurantTitle>
+              <OrderSubTotal>sub total r${totalPrice}</OrderSubTotal>
+            </OrderContainerInfo>
+          </OrderContainer>
+        )} */}
+
         <ThemeProvider theme={theme}>
           <BottomNavigation
             value={value}

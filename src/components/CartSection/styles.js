@@ -64,16 +64,25 @@ export const FreteText = styled.p`
   font-size: 1rem;
   font-weight: 600;
   text-align: end;
+  margin-right: 3rem;
 `;
 
 export const TotalText = styled(FreteText)`
   font-size: 18px;
   color: #e86e5a;
+  margin-right: 2rem;
 `;
 
 export const SubTotalText = styled(FreteText)`
   font-weight: normal;
 `;
+
+export const PaymentMethod = styled(SubTotalText)`
+text-align: start;
+margin-right:0;
+
+
+`
 
 export const Payment = styled.div`
   width: 90vw;
@@ -234,3 +243,44 @@ export const ButtonDelete = styled.button`
     outline: none;
   }
 `;
+
+
+// ==== CONTAINER ORDER ====
+export const OrderContainer = styled.div`
+width: 100vw;
+background-color: #e86e5a;
+display: flex;
+padding: 1rem 0;
+height: 13vh;
+align-items: center;
+justify-content: center;
+position: fixed;
+bottom: 60px;
+
+
+`
+export const OrderContainerInfo = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: space-evenly;
+width: 60vw;
+align-items: center;
+`
+
+export const OrderProgress = styled.p`
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+color: white;
+letter-spacing: -0.39px;
+font-size: 1rem;
+margin: 0;
+width: 45vw;
+`
+
+export const OrderRestaurantTitle = styled(OrderProgress)`
+color: black;
+`
+
+export const OrderSubTotal = styled(OrderRestaurantTitle)`
+font-weight: bold;
+text-transform: uppercase;
+`

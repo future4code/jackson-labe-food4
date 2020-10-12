@@ -4,11 +4,15 @@ import { TextField, Button, ThemeProvider } from "@material-ui/core";
 import useForm from "../../Hooks/useForm";
 import { editAddresProfile } from "../../services/PutEnderecoProfile";
 import React, {useEffect} from "react";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import {goToProfile} from "../../router/goToPages"
 
 
 
 import { theme } from "../../constants/themes";
 import styled from "styled-components";
+
+import {ContainerTitle, TitleRestaurant } from "./styles"
 
 const AddressContainer = styled.div`
   display: flex;
@@ -74,7 +78,10 @@ function EditAddress() {
   return (
     <ThemeProvider theme={theme}>
       <AddressContainer>
-        <Title>Meu Endereço</Title>
+      <ContainerTitle>
+        <ArrowBackIosIcon onClick={() => goToProfile(history)} />
+        <TitleRestaurant>Editar Endereço</TitleRestaurant>
+      </ContainerTitle>
         <form id={"addres_form"}>
           <TextField
             value={form.street}

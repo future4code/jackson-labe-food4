@@ -255,7 +255,7 @@ height: 13vh;
 align-items: center;
 justify-content: center;
 position: fixed;
-bottom: 60px;
+bottom: 55.6px;
 
 
 `

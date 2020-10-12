@@ -34,6 +34,7 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import { useHistory } from "react-router-dom";
 import { BASE_URL } from "../../constants/urls";
+import Button from '@material-ui/core/Button';
 
 import {
   goToEditAddress, goToEditProfile,
@@ -102,14 +103,21 @@ function ProfilePage() {
         console.log(err);
       });
   };
-  console.log(orderHistory);
+
+  const logout = () => {
+    localStorage.removeItem("token")
+    history.push("/")
+  }
 
 
   return (
     <>
+    <ThemeProvider theme={theme}>
       <Container>
         <Title>Meu Perfil</Title>
+        <Button color="primary" onClick={logout}>Logout</Button>
       </Container>
+      </ThemeProvider>
 
       {profile === null && (
         <p>

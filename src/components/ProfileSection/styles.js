@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
   width: 100vw;
   border-bottom: 1px solid #eeeeee;
 `;
@@ -16,6 +16,7 @@ export const Title = styled.div`
   text-align: center;
   margin-top: 3vw;
   margin-bottom: 3vw;
+  margin-left: 7rem;
 `;
 
 export const DataProfile = styled.div`

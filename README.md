@@ -23,8 +23,8 @@ http://woebegone-finger.surge.sh
 
 
 ### Funcionalidades
-Todos os endpoints estão funcionando. Pode realizar os testes normalmente.
-Não é possível adicionar um produto com o valor vazio durante a seleção de quantidade.
+Todos os endpoints estão funcionando. Pode realizar os testes normalmente.<br />
+Não é possível adicionar um produto com o valor vazio durante a seleção de quantidade.<br />
 Ao clicar em adicionar um item, após a seleção da quantidade, irá aparecer a opção de remover e quantos itens você selecinou.
 
 

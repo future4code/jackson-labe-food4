@@ -18,7 +18,7 @@ http://woebegone-finger.surge.sh
 <a href="https://imgbb.com/"><img src="https://i.ibb.co/nbkcK8s/telacaptura7.png" alt="telacaptura7" border="0"></a>
 <a href="https://imgbb.com/"><img src="https://i.ibb.co/c3DLGkJ/telarappi5.png" alt="telarappi5" border="0"></a>
 <a href="https://imgbb.com/"><img src="https://i.ibb.co/ZGq9S9D/telarrapi4.png" alt="telarrapi4" border="0"></a>
-<a href="https://imgbb.com/"><img src="https://i.ibb.co/VYH2fyy/Whats-App-Image-2020-10-11-at-21-28-53.jpg" alt="Whats-App-Image-2020-10-11-at-21-28-53" border="0"></a><br /><a target='_blank' href='https://imgbb.com/'>gif chibi</a><br />
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/VYH2fyy/Whats-App-Image-2020-10-11-at-21-28-53.jpg" alt="Whats-App-Image-2020-10-11-at-21-28-53" border="0"></a><br /><a
 
 
 

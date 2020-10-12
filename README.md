@@ -1,10 +1,10 @@
 # Rappi4
 
-Front-end criado para o clone do Rappi.
+Rappi4 - Seus pedidos num piscar!
 
 ## Link da Aplicação
 
-http://numberless-wash.surge.sh
+http://extra-large-uncle.surge.sh
 
 ## Screenshots :camera:
 
@@ -26,5 +26,7 @@ http://numberless-wash.surge.sh
 Todos os endpoints estão funcionando. Pode realizar os testes normalmente.<br />
 Não é possível adicionar um produto com o valor vazio durante a seleção de quantidade.<br />
 Ao clicar em adicionar um item, após a seleção da quantidade, irá aparecer a opção de remover e quantos itens você selecinou.
+Função Logout implementada.
+Editar dados estão funcionando também.
 
 

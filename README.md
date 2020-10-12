@@ -4,7 +4,7 @@ Front-end criado para o clone do Rappi.
 
 ## Link da Aplicação
 
-http://woebegone-finger.surge.sh
+http://numberless-wash.surge.sh
 
 ## Screenshots :camera:
 

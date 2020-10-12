@@ -105,7 +105,6 @@ function CartPage(props) {
     request
       .then((response) => {
         setAddress(response.data.address);
-        setOrderContainer(true);
       })
       .catch((err) => {
         console.log(err);
@@ -149,11 +148,17 @@ function CartPage(props) {
 
     request
       .then((response) => {
-        console.log(response.data);      })
+       console.log(response.data)
+       setOrderContainer(true);
+       setOrder(response.data.order)
+        
+      })
+        
       .catch((err) => {
         console.log(err);
       });
   };
+
 
   // Remove item do carrinho
   const removeItemOnCart = (id) => {
@@ -173,6 +178,8 @@ function CartPage(props) {
 
   console.log(props.carrinho)
   console.log(form.pagamento)
+  console.log(order)
+  console.log(orderContainer)
 
   return (
     <BaseFlex>
@@ -280,7 +287,7 @@ function CartPage(props) {
 
       {/* Botton Nav */}
       <BaseFlexNav>
-        {/* {order !== null && (
+        {orderContainer && (
           <OrderContainer>
             <AccessTimeIcon fontSize="large" />
 
@@ -290,7 +297,7 @@ function CartPage(props) {
               <OrderSubTotal>sub total r${totalPrice}</OrderSubTotal>
             </OrderContainerInfo>
           </OrderContainer>
-        )} */}
+        )}
 
         <ThemeProvider theme={theme}>
           <BottomNavigation
